@@ -3,42 +3,41 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <link rel="stylesheet" href="style1.css">
     <script src="script.js" defer></script>
 </head>
-
-<body class="min-h-screen bg-slate-800 flex justify-center items-center">
-
-    <div class="h-72 bg-slate-100 w-1/2 rounded-xl py-4 px-5 flex justify-center items-center flex-col hidden">
+<body class="min-h-screen bg-slate-900 flex justify-center items-center">
+    <div id="rules" class="h-72 bg-slate-100 w-1/2 rounded-lg py-4 px-5 flex justify-center items-center flex-col gap-10">
         <p class="text-center">Lorem ipsum dolor sit amet consectetur adipisicing
             elit. Dolorum,
             ab fugiat possimus delectus dolor obcaecati iusto harum, blanditiis labore maxime
             provident eveniet pariatur, ea quidem voluptatum esse maiores natus. Dolorum?</p>
-        <button id="btn_start" class="bg-blue-600 rounded-lg p-2 text-white hover:bg-blue-800 mt-5">Debuter le jeu</button>
+        <button id="btn_start" class="bg-blue-600 rounded-lg py-2 px-6 text-white hover:bg-blue-800">Débuter le jeu</button>
     </div>
-    <div id="liste_joueurs" class="hidden">
 
-
+    <div id="liste_joueurs" class="w-1/2 py-5 px-4 bg-slate-700 rounded-lg flex flex-col items-center justify-between gap-5 hidden">
+        <h1 class="text-center font-bold">Liste des joueurs</h1>
     </div>
-    <div id="inscription" class="flex flex-col items-center bg-white w-96 h-96 px-5 justify-around rounded-lg">
+
+    <div id="inscription" class="flex flex-col items-center bg-white w-96 h-96 px-5 justify-around rounded-lg hidden">
         <div  class="w-full"> 
             <label class="w-full font-bold">Username</label>
-            <input type="text" class="w-full h-10 bg-gray-300 rounded-lg mt-2 px-3 focus:bg-gray-200 font-medium">
+            <input type="text" class="w-full h-10 bg-gray-300 roundqed-lg mt-2 px-3 focus:bg-gray-200 font-medium">
         </div>
+
         <div  class="w-full">
             <label class="w-full font-bold">Password</label>
             <input type="password" class="w-full h-10 bg-gray-300 rounded-lg mt-2 px-3 focus:bg-gray-200 font-medium">
         </div>
+
         <div  class="w-full">
             <input type="file" class="w-full">
         </div>
+
         <div class="flex w-full  w-full h-10 gap-5 text-white">
             <button class="w-full bg-blue-800 rounded-lg hover:bg-blue-600">Enregistrer</button>
-            <button class="w-full bg-red-800 rounded-lg hover:bg-red-600">Annuler</button>
+            <button id="cancel_registration" class="w-full bg-red-800 rounded-lg hover:bg-red-600">Annuler</button>
         </div>
-
     </div>
-    <script src="tail.js"></script>
+    <script src="tailwindcss.js"></script>
 </body>
-
 </html>
