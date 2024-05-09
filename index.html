@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="style1.css">
+    <script src="script.js" defer></script>
+</head>
+
+<body class="min-h-screen bg-slate-800 flex justify-center items-center">
+
+    <div class="h-72 bg-slate-100 w-1/2 rounded-xl py-4 px-5 flex justify-center items-center flex-col hidden">
+        <p class="text-center">Lorem ipsum dolor sit amet consectetur adipisicing
+            elit. Dolorum,
+            ab fugiat possimus delectus dolor obcaecati iusto harum, blanditiis labore maxime
+            provident eveniet pariatur, ea quidem voluptatum esse maiores natus. Dolorum?</p>
+        <button id="btn_start" class="bg-blue-600 rounded-lg p-2 text-white hover:bg-blue-800 mt-5">Debuter le jeu</button>
+    </div>
+    <div id="liste_joueurs" class="hidden">
+
+
+    </div>
+    <div id="inscription" class="hidden flex flex-col items-center bg-white w-96 h-96 px-5 justify-around rounded-lg">
+        <div  class="w-full"> 
+            <label for="" class="w-full font-bold">Username</label>
+            <input type="text" class="w-full h-10 bg-gray-300 rounded-lg mt-2 px-3 focus:bg-gray-200 font-medium">
+        </div>
+        <div  class="w-full">
+            <label for="" class="w-full font-bold">Password</label>
+            <input type="password" class="w-full h-10 bg-gray-300 rounded-lg mt-2 px-3 focus:bg-gray-200 font-medium">
+        </div>
+        <div  class="w-full">
+            <input type="file" class="w-full">
+        </div>
+        <div class="flex w-full  w-full h-10 gap-5 text-white">
+            <button class="w-full bg-blue-800 rounded-lg hover:bg-blue-600">Enregistrer</button>
+            <button class="w-full bg-red-800 rounded-lg hover:bg-red-600">Annuler</button>
+        </div>
+
+    </div>
+    <script src="tail.js"></script>
+</body>
+
+</html>
