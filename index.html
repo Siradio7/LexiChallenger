@@ -3,41 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <script src="script.js" defer></script>
+    <script src="js/script.js" defer></script>
 </head>
 <body class="min-h-screen bg-slate-900 flex justify-center items-center">
-    <div id="rules" class="h-72 bg-slate-100 w-1/2 rounded-lg py-4 px-5 flex justify-center items-center flex-col gap-10">
-        <p class="text-center">Lorem ipsum dolor sit amet consectetur adipisicing
-            elit. Dolorum,
-            ab fugiat possimus delectus dolor obcaecati iusto harum, blanditiis labore maxime
-            provident eveniet pariatur, ea quidem voluptatum esse maiores natus. Dolorum?</p>
-        <button id="btn_start" class="bg-blue-600 rounded-lg py-2 px-6 text-white hover:bg-blue-800">Débuter le jeu</button>
+    <div id="rules" class="max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 hidden">
+        <a href="#">
+            <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Plongez dans l'univers captivant des devinettes de mots !</h5>
+        </a>
+        <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Êtes-vous prêt à relever le défi et à laisser votre esprit s'épanouir ? Avec quelques lettres cachées comme seules pistes, c'est à vous de jouer pour démêler les mystères des mots. Que vous soyez un novice curieux ou un expert en herbe, notre jeu vous promet des heures de divertissement et de stimulation cérébrale.</p>
+        <a href="pages/home.html" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+            Débuter le jeu
+            <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
+            </svg>
+        </a>
     </div>
 
-    <div id="liste_joueurs" class="w-1/2 py-5 px-4 bg-slate-700 rounded-lg flex flex-col items-center justify-between gap-5 hidden">
+
+    <div id="liste_joueurs" class="w-1/2 py-5 px-4 bg-slate-700 rounded-lg flex flex-col items-center justify-between gap-5 ">
         <h1 class="text-center font-bold">Liste des joueurs</h1>
     </div>
 
-    <div id="inscription" class="flex flex-col items-center bg-white w-96 h-96 px-5 justify-around rounded-lg hidden">
-        <div  class="w-full"> 
-            <label class="w-full font-bold">Username</label>
-            <input type="text" class="w-full h-10 bg-gray-300 roundqed-lg mt-2 px-3 focus:bg-gray-200 font-medium">
-        </div>
-
-        <div  class="w-full">
-            <label class="w-full font-bold">Password</label>
-            <input type="password" class="w-full h-10 bg-gray-300 rounded-lg mt-2 px-3 focus:bg-gray-200 font-medium">
-        </div>
-
-        <div  class="w-full">
-            <input type="file" class="w-full">
-        </div>
-
-        <div class="flex w-full  w-full h-10 gap-5 text-white">
-            <button class="w-full bg-blue-800 rounded-lg hover:bg-blue-600">Enregistrer</button>
-            <button id="cancel_registration" class="w-full bg-red-800 rounded-lg hover:bg-red-600">Annuler</button>
-        </div>
+    <div id="inscription" class="hidden max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-6 md:p-8 dark:bg-gray-800 dark:border-gray-700">
+        <form class="space-y-6" action="#">
+            <h5 class="text-xl font-medium text-gray-900 dark:text-white">Créer votre profil</h5>
+            <div>
+                <label for="username" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nom d'utilisateur</label>
+                <input type="text" name="username" id="username" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="eclipse@gmail.com" required />
+            </div>
+            <div>
+                <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Mot de passe</label>
+                <input type="password" name="password" id="password" placeholder="••••••••" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" required />
+            </div>
+            <button type="submit" class="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Enregistrer</button>
+            <button type="submit" class="w-full text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">Annuler</button>
+        </form>
     </div>
-    <script src="tailwindcss.js"></script>
+
+    <script src="css/tailwindcss.js"></script>
 </body>
 </html>

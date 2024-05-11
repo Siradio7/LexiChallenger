@@ -7,7 +7,7 @@ btnStart.addEventListener("click", async () => {
     rules.classList.add("hidden")
     playersList.classList.remove("hidden")
 
-    await fetch("./players.json").then(res => {
+    await fetch("./data/players.json").then(res => {
         res.json().then(res => {
             localStorage.setItem("players", JSON.stringify(res.players))
         })
@@ -50,7 +50,7 @@ function createPlayerInTheDOM(player) {
     const profile = document.createElement("img")
     profile.setAttribute("src", "hello.png")
     profile.setAttribute("alt", "profile")
-    profile.classList.add("h-full", "rounded-full")
+    profile.classList.add("w-10", "h-10", "rounded-full")
 
     const username = document.createElement("p")
     username.classList.add("font-medium")

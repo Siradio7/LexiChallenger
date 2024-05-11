@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../js/script.js" defer></script>
+</head>
+<body class="min-h-screen w-full">
+    <header class="flex justify-between items-center p-2 bg-gray-800 h-[10vh]">
+        <div class="flex items-center gap-4">
+            <img class="w-10 h-10 rounded-full" src="../images/hello.png" alt="">
+            <div class="font-medium dark:text-white">
+                <div>Jese Leos</div>
+                <div class="text-sm text-gray-500 dark:text-gray-400">Joined in August 2014</div>
+            </div>
+        </div>
+
+        <button class="text-white bg-gray-900 hover:bg-gray-950 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5">Logout</button>
+    </header>
+
+    <div class="flex items-center w-full overflow-y-hidden h-[90vh]">
+        <div class="bg-gray-700 w-1/4 overflow-y-hidden h-[90vh]">
+        
+        </div>
+
+        <div class="bg-blue-500 w-3/4 overflow-y-hidden h-[90vh]">
+            <div class="flex items-center justify-between px-2 h-[10vh]">
+                <span>Score</span>
+                <button class="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5">Pause</button>
+            </div>
+
+            <div class="flex items-center p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
+                <svg class="flex-shrink-0 inline w-4 h-4 me-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                  <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
+                </svg>
+                <span class="sr-only">Info</span>
+                <div>
+                  <span class="font-medium">Danger alert!</span> Change a few things up and try submitting again.
+                </div>
+            </div>
+
+            <div class="flex items-center p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400" role="alert">
+                <svg class="flex-shrink-0 inline w-4 h-4 me-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                  <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
+                </svg>
+                <span class="sr-only">Info</span>
+                <div>
+                  <span class="font-medium">Success alert!</span> Change a few things up and try submitting again.
+                </div>
+            </div>
+
+            <div class="bg-red-600 h-[40vh]">
+                
+                <p>Mot a deviner</p>
+            </div>
+        </div>
+    </div>
+    
+<script src="../css/tailwindcss.js"></script>
+</body>
+</html>
