@@ -3,6 +3,20 @@ const inscription = document.getElementById("inscription")
 const rules = document.getElementById("rules")
 const btnStart = document.getElementById("btn_start")
 
+// On met un écouteur sur la liste des joueurs pour savoir quand elle complètement chargée
+let config = { childList: true, subtree: true };
+let observer = new MutationObserver((mutationsList, observer) => {
+    for(let mutation of mutationsList) {
+        if (mutation.type === 'childList' && mutation.addedNodes.length > 0) {
+            if (document.querySelector('.player')) {
+                document.getElementById("loader").classList.add("hidden")
+            }
+        }
+    }
+})
+
+observer.observe(playersList, config)
+
 btnStart.addEventListener("click", async () => {
     rules.classList.add("hidden")
     playersList.classList.remove("hidden")
@@ -24,7 +38,7 @@ function startGame() {
     })
     
     const btnCreateProfile = document.createElement("button")
-    btnCreateProfile.classList.add("bg-slate-800", "rounded-lg", "py-2", "px-6", "hover:bg-slate-500", "text-white")
+    btnCreateProfile.classList.add("inline-flex", "items-center", "px-3", "py-2", "text-sm", "font-medium", "text-center", "text-white", "bg-blue-700", "rounded-lg", "hover:bg-blue-800", "focus:ring-4", "focus:outline-none", "focus:ring-blue-300", "dark:bg-blue-600", "dark:hover:bg-blue-700", "dark:focus:ring-blue-800")
     btnCreateProfile.innerText = "Créer un nouveau profil"
     btnCreateProfile.addEventListener("click", () => {
         showCreateProfileForm()
@@ -45,15 +59,15 @@ document.getElementById("cancel_registration").addEventListener("click", () => {
 
 function createPlayerInTheDOM(player) {
     const playerItem = document.createElement("div")
-    playerItem.classList.add("w-full", "h-16", "py-5", "px-4", "bg-slate-600", "hover:bg-slate-500", "rounded-lg", "flex", "items-center", "gap-5")
+    playerItem.classList.add("w-full", "h-16", "py-5", "px-4", "border", "border-gray-600", "hover:bg-gray-700", "hover:border-none", "rounded-lg", "flex", "items-center", "gap-5", "cursor-pointer", "transition", "duration-300", "ease-in-out", "player")
 
     const profile = document.createElement("img")
-    profile.setAttribute("src", "hello.png")
+    profile.setAttribute("src", "images/hello.png")
     profile.setAttribute("alt", "profile")
     profile.classList.add("w-10", "h-10", "rounded-full")
 
     const username = document.createElement("p")
-    username.classList.add("font-medium")
+    username.classList.add("font-medium", "text-blue-900", "dark:text-blue-700")
     username.innerText = player.username
 
     const score = document.createElement("span")
