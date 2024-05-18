@@ -2,14 +2,14 @@
     "players": [
         {
             "username": "Ant Man",
-            "password": "b94f4032c4b5cb5d534d09e7f42a8c76ad9530cccee04faeb87c31410ca4e80c",
-            "score": 28,
+            "password": "80b1509ea37643250da601f2d24fe9b236b76fd3a3d7d18498d760cdd38813b2",
+            "score": 1230,
             "profileUrl": "..."
         },
 
         {
             "username": "Vega",
-            "password": "a94b5cc462e38ad7094794156ad0103db28614e05aec3b662fecc2ac3bab9ba5",
+            "password": "80b1509ea37643250da601f2d24fe9b236b76fd3a3d7d18498d760cdd38813b2",
             "score": 180,
             "profileUrl": "..."
         }

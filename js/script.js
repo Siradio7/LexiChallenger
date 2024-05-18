@@ -1,9 +1,11 @@
+let players
 const playersList = document.getElementById("liste_joueurs")
 const inscription = document.getElementById("inscription")
+const connexion = document.getElementById("connexion")
 const rules = document.getElementById("rules")
 const btnStart = document.getElementById("btn_start")
 
-// On met un écouteur sur la liste des joueurs pour savoir quand elle complètement chargée
+// On met un écouteur sur la liste des joueurs pour savoir quand elle complètement chargée et faire disparaitre le loader
 let config = { childList: true, subtree: true };
 let observer = new MutationObserver((mutationsList, observer) => {
     for(let mutation of mutationsList) {
@@ -21,20 +23,32 @@ btnStart.addEventListener("click", async () => {
     rules.classList.add("hidden")
     playersList.classList.remove("hidden")
 
+    // Récuperation des informations des joueurs dans le fichier players.json
     await fetch("./data/players.json").then(res => {
         res.json().then(res => {
             localStorage.setItem("players", JSON.stringify(res.players))
         })
     })
-    
+
+    // Lancement du jeu
     startGame()
 })
 
 function startGame() {
-    const players = JSON.parse(localStorage.getItem("players"))
+    // Récuperation des utilisateurs dans le localStorage
+    players = JSON.parse(localStorage.getItem("players"))
 
+    // Affichage des utilisateurs
     players.map(player => {
         playersList.appendChild(createPlayerInTheDOM(player))
+    })
+
+    document.addEventListener("click", (event) => {
+        if (event.target.classList.contains("player")) {
+            // Afficher la page de connexion pour l'utilisateur selectionné
+            const username = event.target.children[1].children[0].innerText
+            redirectToLogin(username)
+        }
     })
     
     const btnCreateProfile = document.createElement("button")
@@ -47,31 +61,48 @@ function startGame() {
     playersList.appendChild(btnCreateProfile)
 }
 
-function showCreateProfileForm() {
-    playersList.classList.add("hidden")
-    inscription.classList.remove("hidden")
+function redirectToLogin(username) {
+    playersList.classList.toggle("hidden")
+    connexion.classList.toggle("hidden")
+    document.getElementById("username_signin").value = username
 }
 
-document.getElementById("cancel_registration").addEventListener("click", () => {
-    inscription.classList.add("hidden")
-    playersList.classList.remove("hidden")
+// Afficher la page d'inscription
+function showCreateProfileForm() {
+    playersList.classList.toggle("hidden")
+    inscription.classList.toggle("hidden")
+}
+
+// Inscription
+document.getElementById("registration").addEventListener("click", () => {
+    const username = document.getElementById("username").value
+    const password = document.getElementById("password").value
+
+
 })
 
+// Annuler l'inscription
+document.getElementById("cancel_registration").addEventListener("click", () => {
+    inscription.classList.toggle("hidden")
+    playersList.classList.toggle("hidden")
+})
+
+// Créer une div pour chaque utilisateur
 function createPlayerInTheDOM(player) {
     const playerItem = document.createElement("div")
-    playerItem.classList.add("w-full", "h-16", "py-5", "px-4", "border", "border-gray-600", "hover:bg-gray-700", "hover:border-none", "rounded-lg", "flex", "items-center", "gap-5", "cursor-pointer", "transition", "duration-300", "ease-in-out", "player")
+    playerItem.classList.add("w-full", "h-16", "py-5", "px-4", "border", "border-gray-600", "hover:bg-gray-900", "hover:shadow", "hover:border-none", "rounded-lg", "flex", "items-center", "gap-5", "cursor-pointer", "transition", "duration-300", "ease-in-out", "player")
 
     const profile = document.createElement("img")
     profile.setAttribute("src", "images/hello.png")
     profile.setAttribute("alt", "profile")
-    profile.classList.add("w-10", "h-10", "rounded-full")
+    profile.classList.add("w-10", "h-10", "rounded-full", "p-1", "ring-2", "ring-gray-300", "dark:ring-gray-500", "cursor-pointer")
 
     const username = document.createElement("p")
     username.classList.add("font-medium", "text-blue-900", "dark:text-blue-700")
     username.innerText = player.username
 
     const score = document.createElement("span")
-    score.classList.add("font-light")
+    score.classList.add("text-sm", "text-gray-500", "dark:text-gray-400")
     score.innerText = "Score: ".concat(player.score)
 
     const infos = document.createElement("div")
@@ -84,6 +115,34 @@ function createPlayerInTheDOM(player) {
     return playerItem
 }
 
+// Connexion
+document.getElementById("signin").addEventListener("click", () => {
+    const username = document.getElementById("username_signin")
+    const password = document.getElementById("password_signin")
+
+    if (username.value.trim() === "" && password.value.trim() === "") {
+        return
+    }
+
+    players.map(player => {
+        hashPassword(password.value).then(hashedPassword => {
+            if (player.username === username.value && player.password === hashedPassword) {
+                username.value = ""
+                password.value = ""
+                //Ajout de l'utilisateur connecté dans le localStorage
+                localStorage.setItem("connectedUser", JSON.stringify(player))
+                // Rédirection vers la page d'accueil
+                redirectToHomePage()
+            }
+        })
+    })
+})
+
+function redirectToHomePage() {
+    window.location.href = "/Devinette/pages/home.html"
+}
+
+// Méthode pour hasher le mot de passe
 async function hashPassword(password) {
     const encoder = new TextEncoder()
     const data = encoder.encode(password)
