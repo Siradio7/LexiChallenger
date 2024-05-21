@@ -1,5 +1,6 @@
 /qodana.sarif.json
 /qodana.yaml
-./.idea
-./.vscode
+.idea
+.vscode
 *.iml
+*.xml
