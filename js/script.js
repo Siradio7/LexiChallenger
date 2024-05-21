@@ -20,16 +20,17 @@ let observer = new MutationObserver((mutationsList, observer) => {
 
 observer.observe(playersList, config)
 
+btnStart.addEventListener("mouseenter", () => {
+    btnStart.children[0].classList.toggle("animate-bounce")
+})
+
+btnStart.addEventListener("mouseleave", () => {
+    btnStart.children[0].classList.toggle("animate-bounce")
+})
+
 btnStart.addEventListener("click", async () => {
     rules.classList.add("hidden")
     playersList.classList.remove("hidden")
-
-    // Récuperation des informations des joueurs dans le fichier players.json
-    await fetch("./data/players.json").then(res => {
-        res.json().then(res => {
-            localStorage.setItem("players", JSON.stringify(res.players))
-        })
-    })
 
     // Lancement du jeu
     startGame()
@@ -74,12 +75,38 @@ function showCreateProfileForm() {
     inscription.classList.toggle("hidden")
 }
 
+document.getElementById("signin_registration").addEventListener("click", () => {
+    connexion.classList.toggle("hidden")
+    inscription.classList.toggle("hidden")
+})
+
 // Inscription
 document.getElementById("registration").addEventListener("click", () => {
-    const username = document.getElementById("username").value
-    const password = document.getElementById("password").value
+    const username = document.getElementById("username")
+    const password = document.getElementById("password")
 
+    if (username.value.trim() !== "" && password.value.trim() !== "") {
+        hashPassword(password.value).then(hashedPassword => {
+            const player = {
+                username: username.value,
+                password: hashedPassword,
+                score: 0,
+                profileUrl: "..."
+            }
 
+            players.push(player)
+            saveInLocalStorage("players", players)
+            saveInLocalStorage("connectedUser", player)
+            showToast("succes", 2000)
+            setTimeout(() => {
+                redirectToHomePage()
+            }, 2000)
+        })
+
+        return
+    }
+
+    showToast("error", 2000)
 })
 
 // Annuler l'inscription
@@ -136,7 +163,7 @@ document.getElementById("signin").addEventListener("click", () => {
                 showToast("success", 1000)
 
                 //Ajout de l'utilisateur connecté dans le localStorage
-                localStorage.setItem("connectedUser", JSON.stringify(player))
+                saveInLocalStorage("connectedUser", JSON.stringify(player))
                 // Rédirection vers la page d'accueil
                 setTimeout(() => {
                     redirectToHomePage()
@@ -185,4 +212,12 @@ async function hashPassword(password) {
     const hashArray = Array.from(new Uint8Array(hashBuffer))
     
     return hashArray.map(byte => byte.toString(16).padStart(2, "0")).join("")
+}
+
+function saveInLocalStorage(key, value) {
+    localStorage.setItem(key, JSON.stringify(value))
+}
+
+function getInLocalStorage(key) {
+    return JSON.parse(localStorage.getItem(key))
 }

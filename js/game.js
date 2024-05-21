@@ -1,6 +1,7 @@
 const connectedUser = JSON.parse(localStorage.getItem("connectedUser"))
 const buttonLogout = document.getElementById("logout")
 
+console.log(connectedUser)
 document.getElementById("username").innerText = connectedUser.username
 
 buttonLogout.addEventListener("click", () => {
