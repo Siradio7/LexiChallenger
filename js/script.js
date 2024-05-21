@@ -1,4 +1,5 @@
 let players
+let body = document.body
 const playersList = document.getElementById("liste_joueurs")
 const inscription = document.getElementById("inscription")
 const connexion = document.getElementById("connexion")
@@ -119,6 +120,7 @@ function createPlayerInTheDOM(player) {
 document.getElementById("signin").addEventListener("click", () => {
     const username = document.getElementById("username_signin")
     const password = document.getElementById("password_signin")
+    let isUserLoggedIn = false
 
     if (username.value.trim() === "" && password.value.trim() === "") {
         return
@@ -129,14 +131,47 @@ document.getElementById("signin").addEventListener("click", () => {
             if (player.username === username.value && player.password === hashedPassword) {
                 username.value = ""
                 password.value = ""
+                isUserLoggedIn = true
+
+                showToast("success", 1000)
+
                 //Ajout de l'utilisateur connecté dans le localStorage
                 localStorage.setItem("connectedUser", JSON.stringify(player))
                 // Rédirection vers la page d'accueil
-                redirectToHomePage()
+                setTimeout(() => {
+                    redirectToHomePage()
+                }, 1000)
+                return
             }
         })
     })
+
+    if (!isUserLoggedIn) {
+        showToast("error", 3000)
+    }
 })
+
+function showToast(toastType, duration) {
+    if (toastType === "success") {
+        body.classList.toggle("flex-col")
+        document.getElementById("toast_success").classList.toggle("hidden")
+
+        setTimeout(() => {
+            body.classList.toggle("flex-col")
+            document.getElementById("toast_success").classList.toggle("hidden")
+        }, duration)
+    } else if (toastType === "error") {
+        body.classList.toggle("flex-col")
+        document.getElementById("toast_error").classList.toggle("hidden")
+
+        setTimeout(() => {
+            body.classList.toggle("flex-col")
+            document.getElementById("toast_error").classList.toggle("hidden")
+        }, duration)
+    } else {
+
+    }
+}
 
 function redirectToHomePage() {
     window.location.href = "/Devinette/pages/home.html"
