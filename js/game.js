@@ -7,7 +7,12 @@ document.addEventListener("DOMContentLoaded", () => {
     // Affichage du nom de la personne connecté sur le header
     document.getElementById("username").innerText = connectedUser.username
     loadUsers()
+    displayGameModal()
 })
+
+function displayGameModal() {
+
+}
 
 // Chargement des joueurs au niveau du classement
 function loadUsers() {
@@ -51,6 +56,7 @@ function loadUsers() {
     })
 }
 
+// Fonction pour rafraichir le classement des joueurs en fonction du score du joueur actuel
 function refreshUsersRanking() {
 
 }
