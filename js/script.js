@@ -163,7 +163,7 @@ document.getElementById("signin").addEventListener("click", () => {
                 showToast("success", 1000)
 
                 //Ajout de l'utilisateur connecté dans le localStorage
-                saveInLocalStorage("connectedUser", JSON.stringify(player))
+                saveInLocalStorage("connectedUser", player)
                 // Rédirection vers la page d'accueil
                 setTimeout(() => {
                     redirectToHomePage()

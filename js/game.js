@@ -1,7 +1,10 @@
-const connectedUser = JSON.parse(JSON.parse(localStorage.getItem("connectedUser")))
+const connectedUser = JSON.parse(localStorage.getItem("connectedUser"))
 const buttonLogout = document.getElementById("logout")
 const buttonPause = document.getElementById("button_pause")
 const ranking = document.getElementById("ranking")
+const words = ["Apprendre", "Programmation", "Rassemblement", "Ensemble", "Pouvoir", "Programme", "Folie", "Confinement", "Maladie", "Phase", "Compilation"]
+let wordToBeGuess, wordGuessed, index, score = 0, nbAttempts = 0, nbLimit = 10
+const generatedIndex = []
 
 document.addEventListener("DOMContentLoaded", () => {
     // Affichage du nom de la personne connecté sur le header
@@ -11,6 +14,41 @@ document.addEventListener("DOMContentLoaded", () => {
 })
 
 function displayGameModal() {
+    const gameModal = document.getElementById("game_modal")
+
+}
+
+// Fonction pour rechercher l'indice généré dans le tableau des anciens indices
+function findGeneratedValue(value) {
+    for (let i = 0; i < generatedIndex.length; i++) {
+        if (generatedIndex[i] === value) {
+            return true
+        }
+    }
+
+    return false
+}
+
+// Fonction pour cacher les lettres
+function hideLetters(word) {
+    let hiddenWord = word.replace(word.substring(0, 3), "***")
+    hiddenWord = hiddenWord.replace(hiddenWord.substring(hiddenWord.length - 1, hiddenWord.length), "*")
+
+    return hiddenWord
+}
+
+function nextWord() {
+    do {
+        index = Math.floor(Math.random() * words.length -1)
+    } while (findGeneratedValue(index))
+
+    generatedIndex.push(index)
+    wordToBeGuess = words[index]
+    // Appel de la fonction hideLetters
+
+}
+
+function validate() {
 
 }
 
