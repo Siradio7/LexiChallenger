@@ -111,6 +111,7 @@ function validate() {
     spanScore.innerText = "Score: ".concat(score).concat(" XP")
     spanNbTry.innerText = "Tentative: ".concat(nbError).concat("/5")
     document.getElementById("guessed_word").focus()
+    refreshUsersRanking()
 }
 
 function endGame() {
@@ -128,9 +129,13 @@ function loadUsers() {
     const players = JSON.parse(localStorage.getItem("players"))
 
     // Trie des joueurs en fonction du score par ordre décroissant
-    const playersSorted = players.sort((a, b) => {
+   /* const playersSorted = players.sort((a, b) => {
         return b.score > a.score
-    })
+    })*/
+    // Trie des joueurs en fonction du score par ordre décroissant
+    const playersSorted = players.sort((a, b) => b.score - a.score)
+
+    ranking.innerHTML = ""; // Clear existing content
 
     // Affichage des joueurs
     playersSorted.map(player => {
@@ -167,7 +172,21 @@ function loadUsers() {
 
 // Fonction pour rafraichir le classement des joueurs en fonction du score du joueur actuel
 function refreshUsersRanking() {
+    const players = JSON.parse(localStorage.getItem("players")) || []
 
+    // Mise à jour du score du joueur connecté
+    const updatedPlayers = players.map(player => {
+        if (player.username === connectedUser.username) {
+            return { ...player, score: score }
+        }
+        return player
+    })
+
+    // Sauvegarde de la liste mise à jour dans le localStorage
+    localStorage.setItem("players", JSON.stringify(updatedPlayers))
+
+    // Recharger les utilisateurs pour refléter les changements
+    loadUsers()
 }
 
 buttonLogout.addEventListener("click", () => {
