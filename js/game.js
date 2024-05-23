@@ -9,9 +9,9 @@ const buttonRestart = document.getElementById("button_restart")
 const spanNbTry = document.getElementById("nb_try")
 const spanScore = document.getElementById("score")
 const ranking = document.getElementById("ranking")
-const words = ["apprendre", "programmation", "rassemblement", "ensemble", "pouvoir", "programme", "folie", "confinement", "maladie", "phase", "compilation", "football", "navigation", "navigateur", "philosophie", "histoire", "ordinateur", "film", "montre", "valeur", "hopital", "joueur", "routeur", "chaise", "climatiseur", "tableau", "ecran"]
-let wordToBeGuess, guessedWord, index, score = 0, nbAttempts = 0, nbError = 0, pas = 1
-const generatedIndex = []
+const words = ["boire", "marcher", "avion", "telephone", "specialite", "abandonner", "vendre", "partir", "constitution", "ecouter", "entrepreneur", "digital", "digitalisation", "sommaire", "departement", "campus", "universite", "cinema", "chemise", "pantalon", "orange", "banane", "mangue", "avocat", "justice", "serveur", "homme", "fichier", "dossier", "apprendre", "programmation", "rassemblement", "ensemble", "pouvoir", "programme", "folie", "confinement", "maladie", "phase", "compilation", "football", "navigation", "navigateur", "philosophie", "histoire", "ordinateur", "film", "montre", "valeur", "hopital", "joueur", "routeur", "chaise", "climatiseur", "tableau", "ecran"]
+let wordToBeGuess, guessedWord, index, score = 0, nbAttempts = 0, nbError = 0, step = 1
+let generatedIndex = []
 
 document.addEventListener("DOMContentLoaded", () => {
     // Affichage du nom de la personne connecté sur le header
@@ -27,6 +27,8 @@ function displayGameModal() {
     if (gamePages.classList.contains("hidden")) {
         gamePages.classList.toggle("hidden")
         resultModal.classList.toggle("hidden")
+        ranking.innerHTML = ""
+        loadUsers()
     }
 
     spanScore.innerText = "Score: ".concat(score).concat(" XP")
@@ -47,19 +49,9 @@ function findGeneratedValue(value) {
 }
 
 // Fonction pour cacher les lettres
-/*
 function hideLetters(word) {
-    let hiddenWord = word.replace(word.substring(0, 3), "***")
-    hiddenWord = hiddenWord.replace(hiddenWord.substring(hiddenWord.length - 1, hiddenWord.length), "*")
-
-    return hiddenWord
+    return word.replace(/[aeiouy]/g, "*");
 }
-*/
-
-function hideLetters(word) {
-    return word.replace(/[aeiouAEIOU]/g, "*");
-}
-
 
 function nextWord() {
     do {
@@ -76,27 +68,21 @@ function validate() {
     document.getElementById("guessed_word").value = ""
 
     if (wordToBeGuess == guessedWord) {
-        score += pas
+        score += step
         nbError = 0
         nbAttempts++
 
         if (nbAttempts == 5) {
-            pas += score == 5 ? 10-pas : 10
+            step += score == 5 ? 10-step : 10
             nbAttempts = 0
         }
-
-        // On passe au prochain mot
-        nextWord()
     } else {
         nbAttempts = 0
         nbError++
 
         if (nbError == 3) {
             score -= Math.floor(score / 5)
-
-            if (score < 0) {
-                score = 0
-            }
+            score = score < 0 ? 0 : score
         }
 
         if (nbError == 5) {
@@ -104,28 +90,43 @@ function validate() {
             endGame()
             return
         }
-
-        nextWord()
     }
 
     spanScore.innerText = "Score: ".concat(score).concat(" XP")
     spanNbTry.innerText = "Tentative: ".concat(nbError).concat("/5")
+    nextWord()
     document.getElementById("guessed_word").focus()
 }
 
 function endGame() {
     gamePages.classList.toggle("hidden")
     resultModal.classList.toggle("hidden")
+    savePlayerResult()
     score = 0
-    pas = 1
+    step = 1
     nbAttempts = 0
     nbError = 0
+    generatedIndex = []
+}
 
+function savePlayerResult() {
+    const players = getInLocalStorage("players")
+    const updatedPlayers = []
+
+    players.map(player => {
+        if (connectedUser.username == player.username) {
+            player.score += score
+        }
+
+        updatedPlayers.push(player)
+    })
+
+    saveInLocalStorage("players", updatedPlayers)
 }
 
 // Chargement des joueurs au niveau du classement
 function loadUsers() {
-    const players = JSON.parse(localStorage.getItem("players"))
+    const players = getInLocalStorage("players")
 
     // Trie des joueurs en fonction du score par ordre décroissant
     const playersSorted = players.sort((a, b) => {
@@ -177,4 +178,12 @@ buttonLogout.addEventListener("click", () => {
 
 function redirectToUsersPage() {
     window.location.href = "/Devinette/index.html"
+}
+
+function saveInLocalStorage(key, value) {
+    localStorage.setItem(key, JSON.stringify(value))
+}
+
+function getInLocalStorage(key) {
+    return JSON.parse(localStorage.getItem(key))
 }

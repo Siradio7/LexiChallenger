@@ -131,7 +131,7 @@ function createPlayerInTheDOM(player) {
 
     const score = document.createElement("span")
     score.classList.add("text-sm", "text-gray-500", "dark:text-gray-400")
-    score.innerText = "Score: ".concat(player.score)
+    score.innerText = "Score: ".concat(player.score).concat(" XP")
 
     const infos = document.createElement("div")
     infos.appendChild(username)
