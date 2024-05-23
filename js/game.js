@@ -1,9 +1,16 @@
 const connectedUser = JSON.parse(localStorage.getItem("connectedUser"))
+const gameModal = document.getElementById("game_modal")
+const resultModal = document.getElementById("result_modal")
+const gamePages = document.getElementById("game_pages")
 const buttonLogout = document.getElementById("logout")
 const buttonPause = document.getElementById("button_pause")
+const buttonGuess = document.getElementById("button_guess")
+const buttonRestart = document.getElementById("button_restart")
+const spanNbTry = document.getElementById("nb_try")
+const spanScore = document.getElementById("score")
 const ranking = document.getElementById("ranking")
-const words = ["Apprendre", "Programmation", "Rassemblement", "Ensemble", "Pouvoir", "Programme", "Folie", "Confinement", "Maladie", "Phase", "Compilation"]
-let wordToBeGuess, wordGuessed, index, score = 0, nbAttempts = 0, nbLimit = 10
+const words = ["apprendre", "programmation", "rassemblement", "ensemble", "pouvoir", "programme", "folie", "confinement", "maladie", "phase", "compilation", "football", "navigation", "navigateur", "philosophie", "histoire", "ordinateur", "film", "montre", "valeur", "hopital", "joueur", "routeur", "chaise", "climatiseur", "tableau", "ecran"]
+let wordToBeGuess, guessedWord, index, score = 0, nbAttempts = 0, nbError = 0, pas = 1
 const generatedIndex = []
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -11,11 +18,21 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("username").innerText = connectedUser.username
     loadUsers()
     displayGameModal()
+    buttonGuess.addEventListener("click", validate)
 })
 
-function displayGameModal() {
-    const gameModal = document.getElementById("game_modal")
+buttonRestart.addEventListener("click", displayGameModal)
 
+function displayGameModal() {
+    if (gamePages.classList.contains("hidden")) {
+        gamePages.classList.toggle("hidden")
+        resultModal.classList.toggle("hidden")
+    }
+
+    spanScore.innerText = "Score: ".concat(score).concat(" XP")
+    spanNbTry.innerText = "Tentative: ".concat(nbError).concat("/5")
+
+    nextWord()
 }
 
 // Fonction pour rechercher l'indice généré dans le tableau des anciens indices
@@ -30,25 +47,79 @@ function findGeneratedValue(value) {
 }
 
 // Fonction pour cacher les lettres
+/*
 function hideLetters(word) {
     let hiddenWord = word.replace(word.substring(0, 3), "***")
     hiddenWord = hiddenWord.replace(hiddenWord.substring(hiddenWord.length - 1, hiddenWord.length), "*")
 
     return hiddenWord
 }
+*/
+
+function hideLetters(word) {
+    return word.replace(/[aeiouAEIOU]/g, "*");
+}
+
 
 function nextWord() {
     do {
         index = Math.floor(Math.random() * words.length -1)
-    } while (findGeneratedValue(index))
+    } while (findGeneratedValue(index) || index > words.length || index < 0)
 
     generatedIndex.push(index)
     wordToBeGuess = words[index]
-    // Appel de la fonction hideLetters
-
+    document.getElementById("word_to_be_guessed").innerText = hideLetters(wordToBeGuess)
 }
 
 function validate() {
+    guessedWord = document.getElementById("guessed_word").value.trim()
+    document.getElementById("guessed_word").value = ""
+
+    if (wordToBeGuess == guessedWord) {
+        score += pas
+        nbError = 0
+        nbAttempts++
+
+        if (nbAttempts == 5) {
+            pas += score == 5 ? 10-pas : 10
+            nbAttempts = 0
+        }
+
+        // On passe au prochain mot
+        nextWord()
+    } else {
+        nbAttempts = 0
+        nbError++
+
+        if (nbError == 3) {
+            score -= Math.floor(score / 5)
+
+            if (score < 0) {
+                score = 0
+            }
+        }
+
+        if (nbError == 5) {
+            // Fin du jeu
+            endGame()
+            return
+        }
+
+        nextWord()
+    }
+
+    spanScore.innerText = "Score: ".concat(score).concat(" XP")
+    spanNbTry.innerText = "Tentative: ".concat(nbError).concat("/5")
+    document.getElementById("guessed_word").focus()
+}
+
+function endGame() {
+    gamePages.classList.toggle("hidden")
+    resultModal.classList.toggle("hidden")
+    score = 0
+    pas = 1
+    nbAttempts = 0
+    nbError = 0
 
 }
 
