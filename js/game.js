@@ -83,6 +83,8 @@ function validate() {
             step += score == 5 ? 10-step : 10
             nbAttempts = 0
         }
+
+        refreshUsersRanking()
     } else {
         showToast("error", 3000, `Erreur, le mot était <span class="font-bold text-xl text-blue-700">'${wordToBeGuess}'</span>`)
         nbAttempts = 0
@@ -91,6 +93,7 @@ function validate() {
         if (nbError == 3) {
             score -= Math.floor(score / 5)
             score = score < 0 ? 0 : score
+            refreshUsersRanking()
         }
 
         if (nbError == 5) {
@@ -104,7 +107,6 @@ function validate() {
     spanNbTry.innerText = "Tentative: ".concat(nbError).concat("/5")
     nextWord()
     document.getElementById("guessed_word").focus()
-    refreshUsersRanking()
 }
 
 function showToast(toastType, duration, text) {
@@ -206,9 +208,9 @@ function refreshUsersRanking() {
     // Mise à jour du score du joueur connecté
     const updatedPlayers = players.map(player => {
         if (player.username === connectedUser.username) {
-            return { ...player, score: player.score + score }
+            return { ...player, score: player.score + step }
         }
-        
+
         return player
     })
 
