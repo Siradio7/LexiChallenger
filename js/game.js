@@ -84,7 +84,7 @@ function validate() {
             nbAttempts = 0
         }
     } else {
-        showToast("error", 3000, `Erreur, vous avez raté le mot était <span class="font-bold text-xl text-blue-700">'${wordToBeGuess}'</span>`)
+        showToast("error", 3000, `Erreur, le mot était <span class="font-bold text-xl text-blue-700">'${wordToBeGuess}'</span>`)
         nbAttempts = 0
         nbError++
 
