@@ -206,8 +206,9 @@ function refreshUsersRanking() {
     // Mise à jour du score du joueur connecté
     const updatedPlayers = players.map(player => {
         if (player.username === connectedUser.username) {
-            return { ...player, score: score }
+            return { ...player, score: player.score + score }
         }
+        
         return player
     })
 
