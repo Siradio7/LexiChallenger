@@ -136,7 +136,7 @@ function loadUsers() {
     // Affichage des joueurs
     playersSorted.map(player => {
         const playerItem = document.createElement("div")
-        playerItem.classList.add("flex", "items-center", "gap-4", "cursor-pointer", "hover:bg-gray-900", "hover:shadow", "py-2", "px-3", "rounded-lg", "transition", "duration-300", "ease-in-out")
+        playerItem.classList.add("flex", "items-center", "gap-4", "cursor-pointer", "bg-gray-900", "hover:bg-gray-800", "shadow", "hover:shadow-lg", "py-2", "px-3", "rounded-lg", "transition", "duration-300", "ease-in-out")
 
         const profile = document.createElement("img")
         profile.setAttribute("src", "../images/hello.png")
@@ -158,11 +158,7 @@ function loadUsers() {
         playerItem.appendChild(profile)
         playerItem.appendChild(infos)
 
-        const separator = document.createElement("hr")
-        separator.classList.add("my-2")
-
         ranking.appendChild(playerItem)
-        ranking.appendChild(separator)
     })
 }
 
@@ -172,13 +168,9 @@ function refreshUsersRanking() {
 }
 
 buttonLogout.addEventListener("click", () => {
-    redirectToUsersPage()
     localStorage.removeItem("connectedUser")
-})
-
-function redirectToUsersPage() {
     window.location.href = "/Devinette/index.html"
-}
+})
 
 function saveInLocalStorage(key, value) {
     localStorage.setItem(key, JSON.stringify(value))
