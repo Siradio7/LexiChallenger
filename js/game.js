@@ -1,4 +1,5 @@
 const connectedUser = JSON.parse(localStorage.getItem("connectedUser"))
+const body = document.body
 const gameModal = document.getElementById("game_modal")
 const resultModal = document.getElementById("result_modal")
 const gamePages = document.getElementById("game_pages")
@@ -73,6 +74,7 @@ function validate() {
     document.getElementById("guessed_word").value = ""
 
     if (wordToBeGuess == guessedWord) {
+        showToast("success", 2000, "Felicitations")
         score += step
         nbError = 0
         nbAttempts++
@@ -82,6 +84,7 @@ function validate() {
             nbAttempts = 0
         }
     } else {
+        showToast("error", 3000, `Erreur, vous avez raté le mot était <span class="font-bold text-xl text-blue-700">'${wordToBeGuess}'</span>`)
         nbAttempts = 0
         nbError++
 
@@ -101,6 +104,30 @@ function validate() {
     spanNbTry.innerText = "Tentative: ".concat(nbError).concat("/5")
     nextWord()
     document.getElementById("guessed_word").focus()
+}
+
+function showToast(toastType, duration, text) {
+    if (toastType === "success") {
+        body.classList.toggle("flex-col")
+        document.getElementById("toast_success").classList.toggle("hidden")
+        document.getElementById("toast_success_text").innerHTML = text
+
+        setTimeout(() => {
+            body.classList.toggle("flex-col")
+            document.getElementById("toast_success").classList.toggle("hidden")
+        }, duration)
+    }
+
+    if (toastType === "error") {
+        body.classList.toggle("flex-col")
+        document.getElementById("toast_error").classList.toggle("hidden")
+        document.getElementById("toast_error_text").innerHTML = text
+
+        setTimeout(() => {
+            body.classList.toggle("flex-col")
+            document.getElementById("toast_error").classList.toggle("hidden")
+        }, duration)
+    }
 }
 
 function endGame() {
