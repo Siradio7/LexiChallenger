@@ -15,7 +15,7 @@ let generatedIndex = []
 
 document.addEventListener("DOMContentLoaded", () => {
     // Affichage du nom de la personne connecté sur le header
-    document.getElementById("username").innerText = connectedUser.username
+    document.getElementById("username").innerText = connectedUser.username.toUpperCase()
     loadUsers()
     displayGameModal()
     buttonGuess.addEventListener("click", validate)
@@ -65,6 +65,11 @@ function nextWord() {
 
 function validate() {
     guessedWord = document.getElementById("guessed_word").value.trim()
+
+    if (guessedWord == "") {
+        return
+    }
+
     document.getElementById("guessed_word").value = ""
 
     if (wordToBeGuess == guessedWord) {
