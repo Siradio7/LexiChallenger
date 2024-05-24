@@ -20,14 +20,6 @@ let observer = new MutationObserver((mutationsList, observer) => {
 
 observer.observe(playersList, config)
 
-btnStart.addEventListener("mouseenter", () => {
-    btnStart.children[0].classList.toggle("animate-bounce")
-})
-
-btnStart.addEventListener("mouseleave", () => {
-    btnStart.children[0].classList.toggle("animate-bounce")
-})
-
 btnStart.addEventListener("click", async () => {
     rules.classList.add("hidden")
     playersList.classList.remove("hidden")
