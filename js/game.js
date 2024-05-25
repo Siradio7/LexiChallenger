@@ -20,6 +20,11 @@ document.addEventListener("DOMContentLoaded", () => {
     loadUsers()
     displayGameModal()
     buttonGuess.addEventListener("click", validate)
+    document.getElementById("guessed_word").addEventListener("keydown", event => {
+        if (event.key === "Enter" || event.keyCode === 13) {
+            buttonGuess.click()
+        }
+    })
 })
 
 buttonRestart.addEventListener("click", displayGameModal)
