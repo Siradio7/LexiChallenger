@@ -166,65 +166,88 @@ function savePlayerResult() {
 
 // Chargement des joueurs au niveau du classement
 function loadUsers() {
-    const players = getInLocalStorage("players")
+    const players = getInLocalStorage("players");
 
     // Trie des joueurs en fonction du score par ordre décroissant
-   /* const playersSorted = players.sort((a, b) => {
-        return b.score > a.score
-    })*/
-    // Trie des joueurs en fonction du score par ordre décroissant
-    const playersSorted = players.sort((a, b) => b.score - a.score)
+    const playersSorted = players.sort((a, b) => b.score - a.score);
 
     ranking.innerHTML = ""; // Clear existing content
 
     // Affichage des joueurs
     playersSorted.map(player => {
-        const playerItem = document.createElement("div")
-        playerItem.classList.add("flex", "items-center", "gap-4", "cursor-pointer", "bg-gray-900", "hover:bg-gray-800", "shadow", "hover:shadow-lg", "py-2", "px-3", "rounded-lg", "transition", "duration-300", "ease-in-out")
+        const playerItem = document.createElement("div");
+        playerItem.classList.add("flex", "items-center", "gap-4", "cursor-pointer", "bg-gray-900", "hover:bg-gray-800", "shadow", "hover:shadow-lg", "py-2", "px-3", "rounded-lg", "transition", "duration-300", "ease-in-out");
+        playerItem.classList.add("ranking-item");
 
-        const profile = document.createElement("img")
-        profile.setAttribute("src", "../images/hello.png")
-        profile.setAttribute("alt", "profile")
-        profile.classList.add("w-10", "h-10", "p-1", "rounded-full", "ring-2", "ring-gray-300", "dark:ring-gray-500", "cursor-pointer")
+        const profile = document.createElement("img");
+        profile.setAttribute("src", "../images/hello.png");
+        profile.setAttribute("alt", "profile");
+        profile.classList.add("w-10", "h-10", "p-1", "rounded-full", "ring-2", "ring-gray-300", "dark:ring-gray-500", "cursor-pointer");
 
-        const username = document.createElement("div")
-        username.innerText = player.username
+        const username = document.createElement("div");
+        username.classList.add("username");
+        username.innerText = player.username;
 
-        const score = document.createElement("span")
-        score.classList.add("text-sm", "text-gray-500", "dark:text-gray-400")
-        score.innerText =  player.score + " XP"
+        const score = document.createElement("span");
+        score.classList.add("text-sm", "text-gray-500", "dark:text-gray-400");
+        score.innerText = player.score + " XP";
 
-        const infos = document.createElement("div")
-        infos.classList.add("font-medium", "dark:text-white")
-        infos.appendChild(username)
-        infos.appendChild(score)
+        const infos = document.createElement("div");
+        infos.classList.add("font-medium", "dark:text-white");
+        infos.appendChild(username);
+        infos.appendChild(score);
 
-        playerItem.appendChild(profile)
-        playerItem.appendChild(infos)
+        playerItem.appendChild(profile);
+        playerItem.appendChild(infos);
 
-        ranking.appendChild(playerItem)
-    })
+        ranking.appendChild(playerItem);
+    });
 }
+
 
 // Fonction pour rafraichir le classement des joueurs en fonction du score du joueur actuel
 function refreshUsersRanking() {
-    const players = JSON.parse(localStorage.getItem("players")) || []
+    const players = JSON.parse(localStorage.getItem("players")) || [];
 
     // Mise à jour du score du joueur connecté
     const updatedPlayers = players.map(player => {
         if (player.username === connectedUser.username) {
-            return { ...player, score: player.score + step }
+            return { ...player, score: player.score + step };
         }
-
-        return player
-    })
+        return player;
+    });
 
     // Sauvegarde de la liste mise à jour dans le localStorage
-    localStorage.setItem("players", JSON.stringify(updatedPlayers))
+    localStorage.setItem("players", JSON.stringify(updatedPlayers));
 
-    // Recharger les utilisateurs pour refléter les changements
+    // Trie des joueurs en fonction du score par ordre décroissant
+    const playersSorted = updatedPlayers.sort((a, b) => b.score - a.score);
+
+    // Mettre à jour le classement avec des animations
+    const rankingItems = Array.from(ranking.children);
+
+    playersSorted.forEach((player, newIndex) => {
+        const playerItem = rankingItems.find(item => item.querySelector('.username').innerText === player.username);
+        const oldIndex = rankingItems.indexOf(playerItem);
+
+        if (oldIndex !== newIndex) {
+            // Appliquer les classes pour l'animation
+            playerItem.classList.add('transition-move');
+            const moveBy = (newIndex - oldIndex) * playerItem.offsetHeight;
+            playerItem.style.transform = `translateY(${moveBy}px)`;
+
+            // Réinitialiser la transformation après l'animation
+            setTimeout(() => {
+                playerItem.style.transform = '';
+                ranking.insertBefore(playerItem, ranking.children[newIndex]);
+                playerItem.classList.remove('transition-move');
+            }, 500);
+        }
+    });
+
     loadUsers()
 }
+
 
 buttonLogout.addEventListener("click", () => {
     localStorage.removeItem("connectedUser")

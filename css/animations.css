@@ -157,3 +157,8 @@
         border-radius: 50%;
     }
 }
+
+/* CSS à ajouter pour les transitions */
+.transition-move {
+    transition: transform 0.5s ease-in-out;
+}
