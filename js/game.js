@@ -12,6 +12,7 @@ const spanScore = document.getElementById("score")
 const ranking = document.getElementById("ranking")
 const words = ["boire", "marcher", "avion", "telephone", "specialite", "abandonner", "vendre", "partir", "constitution", "ecouter", "entrepreneur", "digital", "digitalisation", "sommaire", "departement", "campus", "universite", "cinema", "chemise", "pantalon", "orange", "banane", "mangue", "avocat", "justice", "serveur", "homme", "fichier", "dossier", "apprendre", "programmation", "rassemblement", "ensemble", "pouvoir", "programme", "folie", "confinement", "maladie", "phase", "compilation", "football", "navigation", "navigateur", "philosophie", "histoire", "ordinateur", "film", "montre", "valeur", "hopital", "joueur", "routeur", "chaise", "climatiseur", "tableau", "ecran"]
 let wordToBeGuess, guessedWord, index, score = 0, nbAttempts = 0, nbError = 0, step = 1
+let rankingUserScore
 let generatedIndex = []
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -83,13 +84,12 @@ function validate() {
         score += step
         nbError = 0
         nbAttempts++
+        refreshUsersRanking()
 
         if (nbAttempts == 5) {
             step += score == 5 ? 10-step : 10
             nbAttempts = 0
         }
-
-        refreshUsersRanking()
     } else {
         showToast("error", 3000, `Erreur, le mot était <span class="font-bold text-xl text-blue-700">'${wordToBeGuess}'</span>`)
         nbAttempts = 0
@@ -112,6 +112,10 @@ function validate() {
     spanNbTry.innerText = "Tentative: ".concat(nbError).concat("/5")
     nextWord()
     document.getElementById("guessed_word").focus()
+}
+
+function updateUserScore() {
+    rankingUserScore.innerText = Number(rankingUserScore.innerText.substring(0, rankingUserScore.innerText.indexOf(' '))) + step + " XP"
 }
 
 function showToast(toastType, duration, text) {
@@ -192,6 +196,10 @@ function loadUsers() {
         score.classList.add("text-sm", "text-gray-500", "dark:text-gray-400");
         score.innerText = player.score + " XP";
 
+        if (connectedUser.username == player.username) {
+            rankingUserScore = score
+        }
+
         const infos = document.createElement("div");
         infos.classList.add("font-medium", "dark:text-white");
         infos.appendChild(username);
@@ -245,7 +253,7 @@ function refreshUsersRanking() {
         }
     });
 
-    loadUsers()
+    updateUserScore()
 }
 
 
