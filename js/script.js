@@ -5,9 +5,10 @@ const inscription = document.getElementById("inscription")
 const connexion = document.getElementById("connexion")
 const rules = document.getElementById("rules")
 const btnStart = document.getElementById("btn_start")
+let img
 
 // On met un écouteur sur la liste des joueurs pour savoir quand elle complètement chargée et faire disparaitre le loader
-let config = { childList: true, subtree: true };
+let config = { childList: true, subtree: true }
 let observer = new MutationObserver((mutationsList, observer) => {
     for(let mutation of mutationsList) {
         if (mutation.type === 'childList' && mutation.addedNodes.length > 0) {
@@ -16,6 +17,18 @@ let observer = new MutationObserver((mutationsList, observer) => {
             }
         }
     }
+})
+
+document.addEventListener('DOMContentLoaded', () => {
+    const avatars = document.querySelectorAll('#avatar-grid .avatar')
+
+    avatars.forEach(avatar => {
+        avatar.addEventListener('click', () => {
+            avatars.forEach(img => img.classList.remove('ring-2', 'ring-gray-300', 'dark:ring-blue-700'))
+            avatar.classList.add('ring-2', 'ring-gray-300', 'dark:ring-blue-700')
+            localStorage.setItem("playerProfileUrl", avatar.src)
+        })
+    })
 })
 
 btnStart.addEventListener("click", async () => {
@@ -83,11 +96,12 @@ document.getElementById("registration").addEventListener("click", () => {
 
     if (username.value.trim() !== "" && password.value.trim() !== "") {
         hashPassword(password.value).then(hashedPassword => {
+            const profileUrl = localStorage.getItem("playerProfileUrl") || "/images/hello.png"
             const player = {
                 username: username.value,
                 password: hashedPassword,
                 score: 0,
-                profileUrl: "..."
+                profileUrl: profileUrl
             }
 
             players.push(player)
@@ -95,7 +109,7 @@ document.getElementById("registration").addEventListener("click", () => {
             saveInLocalStorage("connectedUser", player)
             showToast("succes", 2000)
             setTimeout(() => {
-                redirectToHomePage()
+                chooseAnAvatar()
             }, 2000)
         })
 
@@ -103,6 +117,16 @@ document.getElementById("registration").addEventListener("click", () => {
     }
 
     showToast("error", 2000)
+})
+
+function chooseAnAvatar() {
+    inscription.classList.toggle("hidden")
+    document.getElementById("avatars").classList.toggle("hidden")
+}
+
+document.getElementById("button_choose_avatar").addEventListener("click", () => {
+    localStorage.removeItem("playerProfileUrl")
+    redirectToHomePage()
 })
 
 // Annuler l'inscription

@@ -18,6 +18,7 @@ let generatedIndex = []
 document.addEventListener("DOMContentLoaded", () => {
     // Affichage du nom de la personne connecté sur le header
     document.getElementById("username").innerText = connectedUser.username.toUpperCase()
+    document.getElementById("player_profile").srcset = connectedUser.profileUrl
     loadUsers()
     displayGameModal()
     buttonGuess.addEventListener("click", validate)
