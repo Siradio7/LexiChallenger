@@ -189,7 +189,7 @@ function loadUsers() {
         playerItem.classList.add("ranking-item");
 
         const profile = document.createElement("img");
-        profile.setAttribute("src", "../images/hello.png");
+        profile.setAttribute("src", player.profileUrl);
         profile.setAttribute("alt", "profile");
         profile.classList.add("w-10", "h-10", "p-1", "rounded-full", "ring-2", "ring-gray-300", "dark:ring-gray-500", "cursor-pointer");
 

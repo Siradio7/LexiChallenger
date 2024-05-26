@@ -136,7 +136,7 @@ function createPlayerInTheDOM(player) {
     playerItem.classList.add("w-full", "h-16", "py-5", "px-4", "border", "border-gray-600", "hover:bg-gray-900", "hover:shadow", "hover:border-none", "rounded-lg", "flex", "items-center", "gap-5", "cursor-pointer", "transition", "duration-300", "ease-in-out", "player")
 
     const profile = document.createElement("img")
-    profile.setAttribute("src", "images/hello.png")
+    profile.setAttribute("src", player.profileUrl)
     profile.setAttribute("alt", "profile")
     profile.classList.add("w-10", "h-10", "rounded-full", "p-1", "ring-2", "ring-gray-300", "dark:ring-gray-500", "cursor-pointer")
 
