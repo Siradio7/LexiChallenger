@@ -259,7 +259,7 @@ function refreshUsersRanking() {
 
 buttonLogout.addEventListener("click", () => {
     localStorage.removeItem("connectedUser")
-    window.location.href = "/Devinette/index.html"
+    window.location.pathname = "/"
 })
 
 function saveInLocalStorage(key, value) {

@@ -197,7 +197,7 @@ function showToast(toastType, duration) {
 }
 
 function redirectToHomePage() {
-    window.location.href = "/Devinette/pages/home.html"
+    window.location.pathname = "/pages/home.html"
 }
 
 // Méthode pour hasher le mot de passe
