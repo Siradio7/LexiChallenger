@@ -11,7 +11,7 @@ const spanNbTry = document.getElementById("nb_try")
 const spanScore = document.getElementById("score")
 const ranking = document.getElementById("ranking")
 const words = ["boire", "langage", "table", "ranger", "ecran", "dessiner", "rouler", "classe", "commutateur", "filiale", "editeur", "application", "rouge", "tenis", "ligue", "jeu", "jour", "nuit", "chambre", "hotel", "lycee", "college", "ecole", "primaire", "sac", "savon", "moto", "ivre", "blague", "blaguer", "nature", "naturel", "voyager", "jeune", "dame", "montagne", "camion", "espion", "guerre", "guerrier", "fumer", "journee", "abeille", "lion", "soigner", "fenetre", "rideau", "chaussure", "bidon", "armoire", "parfum", "mirroir", "disque", "maillot", "site", "internet", "preparer", "danser", "rire", "brancher", "pratiquer", "exercice", "contrat", "assurance", "banque", "voiture",  "ventilateur", "arroser",  "marcher", "avion", "telephone", "specialite", "abandonner", "vendre", "partir", "constitution", "ecouter", "entrepreneur", "digital", "digitalisation", "sommaire", "departement", "campus", "universite", "cinema", "chemise", "pantalon", "orange", "banane", "mangue", "avocat", "justice", "serveur", "homme", "fichier", "dossier", "apprendre", "programmation", "rassemblement", "ensemble", "pouvoir", "programme", "folie", "confinement", "maladie", "phase", "compilation", "football", "navigation", "navigateur", "philosophie", "histoire", "ordinateur", "film", "montre", "valeur", "hopital", "joueur", "routeur", "chaise", "climatiseur", "tableau", "ecran"]
-let wordToBeGuess, guessedWord, index, score = 0, nbAttempts = 0, nbError = 0, step = 1
+let wordToBeGuess, guessedWord, index, score = 0, nbAttempts = 0, nbError = 0, step = 1, nbWordsFound = 0, nbWords = 0
 let rankingUserScore
 let generatedIndex = []
 
@@ -84,6 +84,7 @@ function validate() {
         score += step
         nbError = 0
         nbAttempts++
+        nbWordsFound++
         refreshUsersRanking()
 
         if (nbAttempts == 5) {
@@ -108,6 +109,7 @@ function validate() {
         }
     }
 
+    nbWords++
     spanScore.innerText = "Score: ".concat(score).concat(" XP")
     spanNbTry.innerText = "Tentative: ".concat(nbError).concat("/5")
     nextWord()
@@ -145,10 +147,12 @@ function showToast(toastType, duration, text) {
 function endGame() {
     gamePages.classList.toggle("hidden")
     resultModal.classList.toggle("hidden")
+    document.getElementById("nb_mots_trouves").innerText = `Vous avez trouvé ${nbWordsFound}/${nbWords} mots \n Score: ${score}`
     savePlayerResult()
     score = 0
     step = 1
     nbAttempts = 0
+    nbWordsFound = 0
     nbError = 0
     generatedIndex = []
 }
