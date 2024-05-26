@@ -5,7 +5,6 @@ const inscription = document.getElementById("inscription")
 const connexion = document.getElementById("connexion")
 const rules = document.getElementById("rules")
 const btnStart = document.getElementById("btn_start")
-let img
 
 // On met un écouteur sur la liste des joueurs pour savoir quand elle complètement chargée et faire disparaitre le loader
 let config = { childList: true, subtree: true }
@@ -105,6 +104,7 @@ document.getElementById("registration").addEventListener("click", () => {
             }
 
             players.push(player)
+            localStorage.removeItem("playerProfileUrl")
             saveInLocalStorage("players", players)
             saveInLocalStorage("connectedUser", player)
             showToast("succes", 2000)
@@ -120,8 +120,8 @@ document.getElementById("registration").addEventListener("click", () => {
 })
 
 document.getElementById("button_choose_avatar").addEventListener("click", () => {
-    localStorage.removeItem("playerProfileUrl")
-    redirectToHomePage()
+    document.getElementById("avatars").classList.toggle("hidden")
+    inscription.classList.toggle("hidden")
 })
 
 // Annuler l'inscription
