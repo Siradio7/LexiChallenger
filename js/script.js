@@ -11,14 +11,12 @@ let config = { childList: true, subtree: true };
 let observer = new MutationObserver((mutationsList, observer) => {
     for(let mutation of mutationsList) {
         if (mutation.type === 'childList' && mutation.addedNodes.length > 0) {
-            if (document.querySelector('.player')) {
+            if (document.querySelector('.player') || document.querySelector('.no_player')) {
                 document.getElementById("loader").classList.add("hidden")
             }
         }
     }
 })
-
-observer.observe(playersList, config)
 
 btnStart.addEventListener("click", async () => {
     rules.classList.add("hidden")
@@ -29,13 +27,18 @@ btnStart.addEventListener("click", async () => {
 })
 
 function startGame() {
+    observer.observe(playersList, config)
     // Récuperation des utilisateurs dans le localStorage
-    players = JSON.parse(localStorage.getItem("players"))
+    players = JSON.parse(localStorage.getItem("players")) || []
 
     // Affichage des utilisateurs
-    players.map(player => {
-        playersList.appendChild(createPlayerInTheDOM(player))
-    })
+    if (players.length > 0) {
+        players.map(player => {
+            playersList.appendChild(createPlayerInTheDOM(player))
+        })
+    } else {
+        observer.disconnect()
+    }
 
     document.addEventListener("click", (event) => {
         if (event.target.classList.contains("player")) {

@@ -154,7 +154,7 @@ function endGame() {
 }
 
 function savePlayerResult() {
-    const players = getInLocalStorage("players")
+    const players = getInLocalStorage("players") || []
     const updatedPlayers = []
 
     players.map(player => {
@@ -170,7 +170,7 @@ function savePlayerResult() {
 
 // Chargement des joueurs au niveau du classement
 function loadUsers() {
-    const players = getInLocalStorage("players");
+    const players = getInLocalStorage("players") || []
 
     // Trie des joueurs en fonction du score par ordre décroissant
     const playersSorted = players.sort((a, b) => b.score - a.score);
