@@ -11,7 +11,7 @@ let config = { childList: true, subtree: true };
 let observer = new MutationObserver((mutationsList, observer) => {
     for(let mutation of mutationsList) {
         if (mutation.type === 'childList' && mutation.addedNodes.length > 0) {
-            if (document.querySelector('.player') || document.querySelector('.no_player')) {
+            if (document.querySelector('.player')) {
                 document.getElementById("loader").classList.add("hidden")
             }
         }
@@ -38,6 +38,7 @@ function startGame() {
         })
     } else {
         observer.disconnect()
+        document.getElementById("loader").classList.add("hidden")
     }
 
     document.addEventListener("click", (event) => {
