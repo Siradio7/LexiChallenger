@@ -1,6 +1,7 @@
 let players
 let body = document.body
-const playersList = document.getElementById("liste_joueurs")
+const listeJoueurs = document.getElementById("liste_joueurs")
+const playersList = document.getElementById("players_list")
 const inscription = document.getElementById("inscription")
 const connexion = document.getElementById("connexion")
 const rules = document.getElementById("rules")
@@ -32,7 +33,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 btnStart.addEventListener("click", async () => {
     rules.classList.add("hidden")
-    playersList.classList.remove("hidden")
+    listeJoueurs.classList.remove("hidden")
 
     // Lancement du jeu
     startGame()
@@ -68,18 +69,18 @@ function startGame() {
         showCreateProfileForm()
     })
     
-    playersList.appendChild(btnCreateProfile)
+    listeJoueurs.appendChild(btnCreateProfile)
 }
 
 function redirectToLogin(username) {
-    playersList.classList.toggle("hidden")
+    listeJoueurs.classList.toggle("hidden")
     connexion.classList.toggle("hidden")
     document.getElementById("username_signin").value = username
 }
 
 // Afficher la page d'inscription
 function showCreateProfileForm() {
-    playersList.classList.toggle("hidden")
+    listeJoueurs.classList.toggle("hidden")
     document.getElementById("avatars").classList.toggle("hidden")
 }
 
@@ -127,7 +128,7 @@ document.getElementById("button_choose_avatar").addEventListener("click", () => 
 // Annuler l'inscription
 document.getElementById("cancel_registration").addEventListener("click", () => {
     inscription.classList.toggle("hidden")
-    playersList.classList.toggle("hidden")
+    listeJoueurs.classList.toggle("hidden")
 })
 
 // Créer une div pour chaque utilisateur
