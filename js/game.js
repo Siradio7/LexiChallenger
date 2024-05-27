@@ -10,6 +10,7 @@ const buttonRestart = document.getElementById("button_restart")
 const spanNbTry = document.getElementById("nb_try")
 const spanScore = document.getElementById("score")
 const ranking = document.getElementById("ranking")
+const rankingPlayers = document.getElementById("ranking_players")
 const words = ["boire", "langage", "table", "ranger", "ecran", "dessiner", "rouler", "classe", "commutateur", "filiale", "editeur", "application", "rouge", "tenis", "ligue", "jeu", "jour", "nuit", "chambre", "hotel", "lycee", "college", "ecole", "primaire", "sac", "savon", "moto", "ivre", "blague", "blaguer", "nature", "naturel", "voyager", "jeune", "dame", "montagne", "camion", "espion", "guerre", "guerrier", "fumer", "journee", "abeille", "lion", "soigner", "fenetre", "rideau", "chaussure", "bidon", "armoire", "parfum", "mirroir", "disque", "maillot", "site", "internet", "preparer", "danser", "rire", "brancher", "pratiquer", "exercice", "contrat", "assurance", "banque", "voiture",  "ventilateur", "arroser",  "marcher", "avion", "telephone", "specialite", "abandonner", "vendre", "partir", "constitution", "ecouter", "entrepreneur", "digital", "digitalisation", "sommaire", "departement", "campus", "universite", "cinema", "chemise", "pantalon", "orange", "banane", "mangue", "avocat", "justice", "serveur", "homme", "fichier", "dossier", "apprendre", "programmation", "rassemblement", "ensemble", "pouvoir", "programme", "folie", "confinement", "maladie", "phase", "compilation", "football", "navigation", "navigateur", "philosophie", "histoire", "ordinateur", "film", "montre", "valeur", "hopital", "joueur", "routeur", "chaise", "climatiseur", "tableau", "ecran"]
 let wordToBeGuess, guessedWord, index, score = 0, nbAttempts = 0, nbError = 0, step = 1, nbWordsFound = 0, nbWords = 0
 let rankingUserScore
@@ -27,6 +28,18 @@ document.addEventListener("DOMContentLoaded", () => {
             buttonGuess.click()
         }
     })
+
+    document.getElementById("button_ranking").addEventListener("click", () => {
+        document.getElementById("game_right_block").classList.remove("z-40")
+        document.getElementById("game_right_block").classList.add("-z-40")
+        ranking.classList.toggle("max-[600px]:hidden")
+    })
+
+    document.getElementById("button_hide_ranking").addEventListener("click", () => {
+        document.getElementById("game_right_block").classList.remove("-z-40")
+        document.getElementById("game_right_block").classList.add("z-40")
+        ranking.classList.toggle("max-[600px]:hidden")
+    })
 })
 
 buttonRestart.addEventListener("click", displayGameModal)
@@ -35,7 +48,7 @@ function displayGameModal() {
     if (gamePages.classList.contains("hidden")) {
         gamePages.classList.toggle("hidden")
         resultModal.classList.toggle("hidden")
-        ranking.innerHTML = ""
+        rankingPlayers.innerHTML = ""
         loadUsers()
     }
 
@@ -181,7 +194,7 @@ function loadUsers() {
     // Trie des joueurs en fonction du score par ordre décroissant
     const playersSorted = players.sort((a, b) => b.score - a.score);
 
-    ranking.innerHTML = ""; // Clear existing content
+    rankingPlayers.innerHTML = ""; // Clear existing content
 
     // Affichage des joueurs
     playersSorted.map(player => {
@@ -214,7 +227,7 @@ function loadUsers() {
         playerItem.appendChild(profile);
         playerItem.appendChild(infos);
 
-        ranking.appendChild(playerItem);
+        rankingPlayers.appendChild(playerItem);
     });
 }
 
@@ -238,7 +251,7 @@ function refreshUsersRanking() {
     const playersSorted = updatedPlayers.sort((a, b) => b.score - a.score);
 
     // Mettre à jour le classement avec des animations
-    const rankingItems = Array.from(ranking.children);
+    const rankingItems = Array.from(rankingPlayers.children);
 
     playersSorted.forEach((player, newIndex) => {
         const playerItem = rankingItems.find(item => item.querySelector('.username').innerText === player.username);
@@ -253,7 +266,7 @@ function refreshUsersRanking() {
             // Réinitialiser la transformation après l'animation
             setTimeout(() => {
                 playerItem.style.transform = '';
-                ranking.insertBefore(playerItem, ranking.children[newIndex]);
+                rankingPlayers.insertBefore(playerItem, rankingPlayers.children[newIndex]);
                 playerItem.classList.remove('transition-move');
             }, 500);
         }

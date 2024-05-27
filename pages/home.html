@@ -23,12 +23,17 @@
     </header>
 
     <div id="game_pages" class="z-40 max-[600px]:px-[20px] flex items-center w-full bg-gray-800 overflow-y-hidden">
-        <div id="ranking" class="z-40 max-[600px]:hidden flex flex-col w-1/4 overflow-y-auto h-[90vh] px-3 gap-4 py-2 border-r border-black"></div>
+        <div id="ranking" class="z-40 flex flex-col w-1/4 overflow-y-auto h-[90vh] px-3 gap-4 py-2 border-r border-black max-[600px]:absolute top-[10vh] max-[600px]:left-0 max-[600px]:h-dvh max-[600px]:w-full max-[600px]:z-100 max-[600px]:px-6 max-[600px]:hidden">
+            <div id="ranking_players" class="flex flex-col gap-3">
 
-        <div class="z-40 w-3/4 max-[600px]:w-full px-2 overflow-y-hidden h-[90vh]">
+            </div>
+            <button id="button_hide_ranking" class="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-md px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 transition duration-300 ease-in-out">Fermer le classement</button>
+        </div>
+
+        <div id="game_right_block" class="z-40 w-3/4 max-[600px]:w-full px-2 overflow-y-hidden h-[90vh]">
             <div class="z-40 flex items-center justify-between py-4 px-6 max-[600px]:px-[0] h-fit">
                 <span class="max-[600px]:hidden"></span>
-                <button id="button_pause" class="min-[600px]:hidden text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 transition duration-300 ease-in-out">classement</button>
+                <button id="button_ranking" class="min-[600px]:hidden text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 transition duration-300 ease-in-out">classement</button>
                 <button id="button_pause" class="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 transition duration-300 ease-in-out">Pause</button>
             </div>
 
