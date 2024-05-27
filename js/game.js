@@ -154,6 +154,7 @@ function endGame() {
     step = 1
     nbAttempts = 0
     nbWordsFound = 0
+    nbWords = 0
     nbError = 0
     generatedIndex = []
 }
