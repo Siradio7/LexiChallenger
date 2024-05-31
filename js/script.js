@@ -34,6 +34,12 @@ document.addEventListener('DOMContentLoaded', () => {
 btnStart.addEventListener("click", async () => {
     rules.classList.add("hidden")
     listeJoueurs.classList.remove("hidden")
+    TweenMax.from(listeJoueurs, 1, {
+        delay: 0,
+        x: 100,
+        opacity: 0,
+        ease: Expo.easeInOut,
+    })
 
     // Lancement du jeu
     startGame()
@@ -75,6 +81,12 @@ function startGame() {
 function redirectToLogin(username) {
     listeJoueurs.classList.toggle("hidden")
     connexion.classList.toggle("hidden")
+    TweenMax.from(connexion, 1, {
+        delay: 0,
+        x: 100,
+        opacity: 0,
+        ease: Expo.easeInOut,
+    })
     document.getElementById("username_signin").value = username
 }
 
@@ -82,11 +94,23 @@ function redirectToLogin(username) {
 function showCreateProfileForm() {
     listeJoueurs.classList.toggle("hidden")
     document.getElementById("avatars").classList.toggle("hidden")
+    TweenMax.from("#avatars", 1, {
+        delay: 0,
+        x: 100,
+        opacity: 0,
+        ease: Expo.easeInOut,
+    })
 }
 
 document.getElementById("signin_registration").addEventListener("click", () => {
     connexion.classList.toggle("hidden")
     inscription.classList.toggle("hidden")
+    TweenMax.from(inscription, 1, {
+        delay: 0,
+        x: 100,
+        opacity: 0,
+        ease: Expo.easeInOut,
+    })
 })
 
 // Inscription
@@ -123,12 +147,24 @@ document.getElementById("registration").addEventListener("click", () => {
 document.getElementById("button_choose_avatar").addEventListener("click", () => {
     document.getElementById("avatars").classList.toggle("hidden")
     inscription.classList.toggle("hidden")
+    TweenMax.from(inscription, 1, {
+        delay: 0,
+        x: 100,
+        opacity: 0,
+        ease: Expo.easeInOut,
+    })
 })
 
 // Annuler l'inscription
 document.getElementById("cancel_registration").addEventListener("click", () => {
     inscription.classList.toggle("hidden")
     listeJoueurs.classList.toggle("hidden")
+    TweenMax.from(listeJoueurs, 1, {
+        delay: 0,
+        x: 100,
+        opacity: 0,
+        ease: Expo.easeInOut,
+    })
 })
 
 // Créer une div pour chaque utilisateur
@@ -198,16 +234,41 @@ function showToast(toastType, duration) {
     if (toastType === "success") {
         body.classList.toggle("flex-col")
         document.getElementById("toast_success").classList.toggle("hidden")
+        TweenMax.from("#toast_success", 1, {
+            delay: 0,
+            y: -10,
+            opacity: 0,
+            ease: Expo.easeInOut,
+        })
 
         setTimeout(() => {
+            TweenMax.to("#toast_success", 1, {
+                delay: 0,
+                y: -10,
+                opacity: 0,
+                ease: Expo.easeInOut,
+            })
             body.classList.toggle("flex-col")
             document.getElementById("toast_success").classList.toggle("hidden")
         }, duration)
     } else if (toastType === "error") {
         body.classList.toggle("flex-col")
         document.getElementById("toast_error").classList.toggle("hidden")
+        TweenMax.from("#toast_error", 1, {
+            delay: 0,
+            y: -10,
+            opacity: 0,
+            ease: Expo.easeInOut,
+        })
 
         setTimeout(() => {
+            TweenMax.to("#toast_error", 1, {
+                delay: 0,
+                y: -10,
+                opacity: 0,
+                ease: Expo.easeInOut
+            })
+
             body.classList.toggle("flex-col")
             document.getElementById("toast_error").classList.toggle("hidden")
         }, duration)
@@ -237,3 +298,16 @@ function saveInLocalStorage(key, value) {
 function getInLocalStorage(key) {
     return JSON.parse(localStorage.getItem(key))
 }
+
+// Animtation
+TweenMax.from(rules, 1, {
+    delay: 0,
+    scale: 0.5,
+    ease: Expo.easeInOut,
+})
+
+TweenMax.from(playersList, 1, {
+    delay: 0,
+    scale: 0.5,
+    ease: Expo.easeInOut,
+})
