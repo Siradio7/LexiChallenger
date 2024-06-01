@@ -33,6 +33,12 @@ document.addEventListener("DOMContentLoaded", () => {
         document.getElementById("game_right_block").classList.remove("z-40")
         document.getElementById("game_right_block").classList.add("-z-40")
         ranking.classList.toggle("max-[600px]:hidden")
+        TweenMax.from(ranking, .5, {
+            delay: 0,
+            x: -100,
+            opacity: 0,
+            ease: Expo.easeInOut
+        })
     })
 
     document.getElementById("button_hide_ranking").addEventListener("click", () => {
