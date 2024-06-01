@@ -208,7 +208,6 @@ function createPlayerInTheDOM(player) {
 document.getElementById("signin").addEventListener("click", () => {
     const username = document.getElementById("username_signin")
     const password = document.getElementById("password_signin")
-    let isUserLoggedIn = false
 
     if (username.value.trim() === "" && password.value.trim() === "") {
         return
@@ -216,27 +215,25 @@ document.getElementById("signin").addEventListener("click", () => {
 
     players.map(player => {
         hashPassword(password.value).then(hashedPassword => {
-            if (player.username === username.value && player.password === hashedPassword) {
-                username.value = ""
-                password.value = ""
-                isUserLoggedIn = true
-
-                showToast("success", 1000)
-
-                //Ajout de l'utilisateur connecté dans le localStorage
-                saveInLocalStorage("connectedUser", player)
-                // Rédirection vers la page d'accueil
-                setTimeout(() => {
-                    redirectToHomePage()
-                }, 1000)
+            if (player.username === username.value || player.password === hashedPassword) {
+                showToast("error", 2000)
                 return
             }
+
+            username.value = ""
+            password.value = ""
+
+            showToast("success", 1000)
+
+            //Ajout de l'utilisateur connecté dans le localStorage
+            saveInLocalStorage("connectedUser", player)
+            // Rédirection vers la page d'accueil
+            setTimeout(() => {
+                redirectToHomePage()
+                return
+            }, 1000)
         })
     })
-
-    if (!isUserLoggedIn) {
-        showToast("error", 2000)
-    }
 })
 
 function showToast(toastType, duration) {

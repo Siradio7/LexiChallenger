@@ -31,14 +31,14 @@
     </header>
 
     <div id="game_pages" class="z-40 max-[600px]:px-[20px] flex items-center w-full bg-gray-800 overflow-y-hidden">
-        <div id="ranking" class="z-40 flex flex-col w-1/4 overflow-y-auto h-[90vh] px-3 gap-4 py-2 border-r border-black max-[600px]:absolute top-[13vh] max-[600px]:left-0 max-[600px]:h-svh max-[600px]:w-full max-[600px]:z-100 max-[600px]:px-6 max-[600px]:hidden">
+        <div id="ranking" class="z-40 hidden flex flex-col w-1/4 overflow-y-auto h-[90vh] px-3 gap-4 py-2 border-r border-black max-[600px]:absolute top-[13vh] max-[600px]:left-0 max-[600px]:h-svh max-[600px]:w-full max-[600px]:z-100 max-[600px]:px-6 max-[600px]:hidden">
             <div id="ranking_players" class="flex flex-col gap-3">
 
             </div>
             <button id="button_hide_ranking" class="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-md px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 transition duration-300 ease-in-out min-[600px]:hidden">Fermer le classement</button>
         </div>
 
-        <div id="game_right_block" class="z-40 w-3/4 max-[600px]:w-full px-2 overflow-y-hidden h-[90vh]">
+        <div id="game_right_block" class="z-40 hidden w-3/4 max-[600px]:w-full px-2 overflow-y-hidden h-[90vh]">
             <div class="z-40 flex items-center justify-between py-4 px-6 max-[600px]:px-[0] h-fit">
                 <span class="max-[600px]:hidden"></span>
                 <button id="button_ranking" class="min-[600px]:hidden text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 transition duration-300 ease-in-out">Classement</button>
@@ -92,6 +92,43 @@
             <button id="button_restart" class="z-80 w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-md px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 transition duration-300 ease-in-out">Reprendre le jeu</button>
         </div>
     </div>
+
+    <!-- Open the modal using ID.showModal() method -->
+    <dialog id="modal_rules" class="modal modal-open">
+        <div class="modal-box h-[70vh] py-5 shadow-xl">
+            <h2 class="font-bold text-xl text-blue-900 dark:text-blue-700">Objectif du jeu</h2>
+            <ul class="py-4">
+                <li>Le but du jeu est de deviner les mots cachés. Vous devrez trouver autant de mots que possible avec le moins d'erreurs possible.</li>
+            </ul>
+            <h2 class="font-bold text-xl text-blue-900 dark:text-blue-700">Déroulement du Jeu</h2>
+            <ul class="py-4 flex flex-col gap-2">
+                <li>Un mot caché vous sera présenté avec certaines de ses lettres remplacées par des astérisques (*). Vous devez deviner le mot en remplissant les lettres manquantes.</li>
+                <li>Vous avez un nombre limité de tentatives pour chaque mot. Le nombre d'erreurs maximum est de 5.</li>
+                <li>Si vous devinez correctement le mot, vous gagnez des points et passez au mot suivant.</li>
+                <li>Si vous faites une erreur, le nombre d'erreurs augmente. Lorsque vous atteignez 5 erreurs, la partie est terminée.</li>
+            </ul>
+            <h2 class="font-bold text-xl text-blue-900 dark:text-blue-700">Scores et Points</h2>
+            <ul class="py-4 flex flex-col gap-2">
+                <li>Vous commencez avec un score de 0.</li>
+                <li>À chaque mot correctement deviné, vous gagnez des points.</li>
+                <li>Si vous atteignez 5 bonnes réponses consécutives, vos points augmentent plus rapidement (le multiplicateur de points augmente).</li>
+                <li>En cas d'erreur, votre score peut diminuer. Après 3 erreurs, vous perdez une partie de vos points (1/5 de votre score actuel).</li>
+                <li>Votre score est affiché en haut de l'écran ainsi que le nombre de tentatives restantes.</li>
+            </ul>
+            <h2 class="font-bold text-xl text-blue-900 dark:text-blue-700">Classement</h2>
+            <ul class="py-4 flex flex-col gap-2">
+                <li>Le classement des joueurs est affiché dans un tableau de classement.</li>
+                <li>Votre position dans le classement est mise à jour en temps réel en fonction de votre score.</li>
+                <li>Vous pouvez voir le classement à tout moment en cliquant sur le bouton "Classement".</li>
+            </ul>
+            <div class="modal-action">
+                <form method="dialog">
+                    <!-- if there is a button in form, it will close the modal -->
+                    <button id="btn_close_modal" class="btn">Fermer</button>
+                </form>
+            </div>
+        </div>
+    </dialog>
 
     <div class="area min-h-screen z-0">
         <ul class="circles">

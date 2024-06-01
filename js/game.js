@@ -29,6 +29,13 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     })
 
+    document.getElementById("btn_close_modal").addEventListener("click", () => {
+        document.getElementById("modal_rules").classList.remove("modal-open")
+        document.getElementById("ranking").classList.remove("hidden")
+        document.getElementById("game_right_block").classList.remove("hidden")
+        playAnimation()
+    })
+
     document.getElementById("button_ranking").addEventListener("click", () => {
         document.getElementById("game_right_block").classList.remove("z-40")
         document.getElementById("game_right_block").classList.add("-z-40")
@@ -310,30 +317,32 @@ TweenMax.from("#logout", .5, {
     ease: Expo.easeInOut
 })
 
-TweenMax.from(ranking, 1, {
-    delay: 0.2,
-    x: -20,
-    opacity: 0,
-    ease: Expo.easeInOut
-})
+function playAnimation() {
+    TweenMax.from(ranking, 1, {
+        delay: 0.2,
+        x: -20,
+        opacity: 0,
+        ease: Expo.easeInOut
+    })
 
-TweenMax.from(gameModal, 1, {
-    delay: 0.6,
-    x: 20,
-    opacity: 0,
-    ease: Expo.easeInOut
-})
+    TweenMax.from(gameModal, 1, {
+        delay: 0.6,
+        x: 20,
+        opacity: 0,
+        ease: Expo.easeInOut
+    })
 
-TweenMax.from("#button_ranking", .5, {
-    delay: 0.7,
-    x: 20,
-    opacity: 0,
-    ease: Expo.easeInOut
-})
+    TweenMax.from("#button_ranking", .5, {
+        delay: 0.7,
+        x: 20,
+        opacity: 0,
+        ease: Expo.easeInOut
+    })
 
-TweenMax.from("#button_pause", .5, {
-    delay: 0.8,
-    x: 20,
-    opacity: 0,
-    ease: Expo.easeInOut
-})
+    TweenMax.from("#button_pause", .5, {
+        delay: 0.8,
+        x: 20,
+        opacity: 0,
+        ease: Expo.easeInOut
+    })
+}
