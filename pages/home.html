@@ -95,32 +95,35 @@
 
     <!-- Open the modal using ID.showModal() method -->
     <dialog id="modal_rules" class="modal modal-open">
-        <div class="modal-box h-[70vh] py-5 shadow-xl">
-            <h2 class="font-bold text-xl text-blue-900 dark:text-blue-700">Objectif du jeu</h2>
-            <ul class="py-4">
-                <li>Le but du jeu est de deviner les mots cachés. Vous devrez trouver autant de mots que possible avec le moins d'erreurs possible.</li>
-            </ul>
-            <h2 class="font-bold text-xl text-blue-900 dark:text-blue-700">Déroulement du Jeu</h2>
-            <ul class="py-4 flex flex-col gap-2">
-                <li>Un mot caché vous sera présenté avec certaines de ses lettres remplacées par des astérisques (*). Vous devez deviner le mot en remplissant les lettres manquantes.</li>
-                <li>Vous avez un nombre limité de tentatives pour chaque mot. Le nombre d'erreurs maximum est de 5.</li>
-                <li>Si vous devinez correctement le mot, vous gagnez des points et passez au mot suivant.</li>
-                <li>Si vous faites une erreur, le nombre d'erreurs augmente. Lorsque vous atteignez 5 erreurs, la partie est terminée.</li>
-            </ul>
-            <h2 class="font-bold text-xl text-blue-900 dark:text-blue-700">Scores et Points</h2>
-            <ul class="py-4 flex flex-col gap-2">
-                <li>Vous commencez avec un score de 0.</li>
-                <li>À chaque mot correctement deviné, vous gagnez des points.</li>
-                <li>Si vous atteignez 5 bonnes réponses consécutives, vos points augmentent plus rapidement (le multiplicateur de points augmente).</li>
-                <li>En cas d'erreur, votre score peut diminuer. Après 3 erreurs, vous perdez une partie de vos points (1/5 de votre score actuel).</li>
-                <li>Votre score est affiché en haut de l'écran ainsi que le nombre de tentatives restantes.</li>
-            </ul>
-            <h2 class="font-bold text-xl text-blue-900 dark:text-blue-700">Classement</h2>
-            <ul class="py-4 flex flex-col gap-2">
-                <li>Le classement des joueurs est affiché dans un tableau de classement.</li>
-                <li>Votre position dans le classement est mise à jour en temps réel en fonction de votre score.</li>
-                <li>Vous pouvez voir le classement à tout moment en cliquant sur le bouton "Classement".</li>
-            </ul>
+        <div class="modal-box py-5 shadow-xl">
+            <h1 class="text-center font-bold h-fit text-3xl mb-4 text-blue-900 dark:text-blue-700">Règles du jeu</h1>
+            <div class="h-[60vh] overflow-y-auto px-5">
+                <h2 class="font-bold text-xl text-blue-900 dark:text-blue-700">Objectif du jeu</h2>
+                <ul class="py-4">
+                    <li>Le but du jeu est de deviner les mots cachés. Vous devrez trouver autant de mots que possible avec le moins d'erreurs possible.</li>
+                </ul>
+                <h2 class="font-bold text-xl text-blue-900 dark:text-blue-700">Déroulement du Jeu</h2>
+                <ul class="py-4 flex flex-col gap-2">
+                    <li>Un mot caché vous sera présenté avec certaines de ses lettres remplacées par des astérisques (*). Vous devez deviner le mot en remplissant les lettres manquantes.</li>
+                    <li>Vous avez un nombre limité de tentatives pour chaque mot. Le nombre d'erreurs maximum est de 5.</li>
+                    <li>Si vous devinez correctement le mot, vous gagnez des points et passez au mot suivant.</li>
+                    <li>Si vous faites une erreur, le nombre d'erreurs augmente. Lorsque vous atteignez 5 erreurs, la partie est terminée.</li>
+                </ul>
+                <h2 class="font-bold text-xl text-blue-900 dark:text-blue-700">Scores et Points</h2>
+                <ul class="py-4 flex flex-col gap-2">
+                    <li>Vous commencez avec un score de 0.</li>
+                    <li>À chaque mot correctement deviné, vous gagnez des points.</li>
+                    <li>Si vous atteignez 5 bonnes réponses consécutives, vos points augmentent plus rapidement (le multiplicateur de points augmente).</li>
+                    <li>En cas d'erreur, votre score peut diminuer. Après 3 erreurs, vous perdez une partie de vos points (1/5 de votre score actuel).</li>
+                    <li>Votre score est affiché en haut de l'écran ainsi que le nombre de tentatives restantes.</li>
+                </ul>
+                <h2 class="font-bold text-xl text-blue-900 dark:text-blue-700">Classement</h2>
+                <ul class="py-4 flex flex-col gap-2">
+                    <li>Le classement des joueurs est affiché dans un tableau de classement.</li>
+                    <li>Votre position dans le classement est mise à jour en temps réel en fonction de votre score.</li>
+                    <li>Vous pouvez voir le classement à tout moment en cliquant sur le bouton "Classement".</li>
+                </ul>
+            </div>
             <div class="modal-action">
                 <form method="dialog">
                     <!-- if there is a button in form, it will close the modal -->
