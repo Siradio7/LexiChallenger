@@ -1,6 +1,6 @@
 @-webkit-keyframes animatetop {
     from {
-        top: -300px;
+        top: -10px;
         opacity: 0;
     }
     to {
@@ -11,7 +11,7 @@
 
 @keyframes animatetop {
     from {
-        top: -300px;
+        top: -10px;
         opacity: 0;
     }
     to {
@@ -161,4 +161,14 @@
 /* CSS à ajouter pour les transitions */
 .transition-move {
     transition: transform 0.5s ease-in-out;
+}
+
+#toast_success {
+    position: relative;
+    animation: animatetop .5s ease-in-out;
+}
+
+#toast_error {
+    position: relative;
+    animation: animatetop .5s ease-in-out;
 }

@@ -234,46 +234,21 @@ function showToast(toastType, duration) {
     if (toastType === "success") {
         body.classList.toggle("flex-col")
         document.getElementById("toast_success").classList.toggle("hidden")
-        TweenMax.from("#toast_success", 1, {
-            delay: 0,
-            y: -10,
-            opacity: 0,
-            ease: Expo.easeInOut,
-        })
 
         setTimeout(() => {
-            TweenMax.to("#toast_success", 1, {
-                delay: 0,
-                y: -10,
-                opacity: 0,
-                ease: Expo.easeInOut,
-            })
             body.classList.toggle("flex-col")
             document.getElementById("toast_success").classList.toggle("hidden")
         }, duration)
-    } else if (toastType === "error") {
+    }
+
+    if (toastType === "error") {
         body.classList.toggle("flex-col")
         document.getElementById("toast_error").classList.toggle("hidden")
-        TweenMax.from("#toast_error", 1, {
-            delay: 0,
-            y: -10,
-            opacity: 0,
-            ease: Expo.easeInOut,
-        })
 
         setTimeout(() => {
-            TweenMax.to("#toast_error", 1, {
-                delay: 0,
-                y: -10,
-                opacity: 0,
-                ease: Expo.easeInOut
-            })
-
             body.classList.toggle("flex-col")
             document.getElementById("toast_error").classList.toggle("hidden")
         }, duration)
-    } else {
-
     }
 }
 
@@ -302,12 +277,28 @@ function getInLocalStorage(key) {
 // Animtation
 TweenMax.from(rules, 1, {
     delay: 0,
-    scale: 0.5,
-    ease: Expo.easeInOut,
+    y: 50,
+    opacity: 0,
+    ease: Expo.easeInOut
 })
 
-TweenMax.from(playersList, 1, {
-    delay: 0,
-    scale: 0.5,
-    ease: Expo.easeInOut,
+TweenMax.from(rules.children[0], 1, {
+    delay: 0.2,
+    x: 20,
+    opacity: 0,
+    ease: Expo.easeInOut
+})
+
+TweenMax.from(rules.children[1], 1, {
+    delay: 0.4,
+    x: 40,
+    opacity: 0,
+    ease: Expo.easeInOut
+})
+
+TweenMax.from(btnStart, 1, {
+    delay: 0.6,
+    x: 60,
+    opacity: 0,
+    ease: Expo.easeInOut
 })

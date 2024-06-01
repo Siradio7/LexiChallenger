@@ -136,23 +136,19 @@ function updateUserScore() {
 
 function showToast(toastType, duration, text) {
     if (toastType === "success") {
-        body.classList.toggle("flex-col")
         document.getElementById("toast_success").classList.toggle("hidden")
         document.getElementById("toast_success_text").innerHTML = text
 
         setTimeout(() => {
-            body.classList.toggle("flex-col")
             document.getElementById("toast_success").classList.toggle("hidden")
         }, duration)
     }
 
     if (toastType === "error") {
-        body.classList.toggle("flex-col")
         document.getElementById("toast_error").classList.toggle("hidden")
         document.getElementById("toast_error_text").innerHTML = text
 
         setTimeout(() => {
-            body.classList.toggle("flex-col")
             document.getElementById("toast_error").classList.toggle("hidden")
         }, duration)
     }
@@ -161,6 +157,11 @@ function showToast(toastType, duration, text) {
 function endGame() {
     gamePages.classList.toggle("hidden")
     resultModal.classList.toggle("hidden")
+    TweenMax.from(resultModal, .5, {
+        x: 20,
+        opacity: 0,
+        ease: Expo.easeInOut
+    })
     document.getElementById("nb_mots_trouves").innerText = `Vous avez trouvé ${nbWordsFound}/${nbWords} mots \n Score: ${score}`
     savePlayerResult()
     score = 0
@@ -288,3 +289,45 @@ function saveInLocalStorage(key, value) {
 function getInLocalStorage(key) {
     return JSON.parse(localStorage.getItem(key))
 }
+
+TweenMax.from("#profile", 1, {
+    delay: 0,
+    x: 20,
+    opacity: 0,
+    ease: Expo.easeInOut
+})
+
+TweenMax.from("#logout", .5, {
+    delay: 0.2,
+    x: 20,
+    opacity: 0,
+    ease: Expo.easeInOut
+})
+
+TweenMax.from(ranking, 1, {
+    delay: 0.2,
+    x: -20,
+    opacity: 0,
+    ease: Expo.easeInOut
+})
+
+TweenMax.from(gameModal, 1, {
+    delay: 0.6,
+    x: 20,
+    opacity: 0,
+    ease: Expo.easeInOut
+})
+
+TweenMax.from("#button_ranking", .5, {
+    delay: 0.7,
+    x: 20,
+    opacity: 0,
+    ease: Expo.easeInOut
+})
+
+TweenMax.from("#button_pause", .5, {
+    delay: 0.8,
+    x: 20,
+    opacity: 0,
+    ease: Expo.easeInOut
+})
