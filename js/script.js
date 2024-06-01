@@ -118,31 +118,40 @@ document.getElementById("registration").addEventListener("click", () => {
     const username = document.getElementById("username")
     const password = document.getElementById("password")
 
-    if (username.value.trim() !== "" && password.value.trim() !== "") {
-        hashPassword(password.value).then(hashedPassword => {
-            const profileUrl = localStorage.getItem("playerProfileUrl") || "/images/hello.png"
-            const player = {
-                username: username.value,
-                password: hashedPassword,
-                score: 0,
-                profileUrl: profileUrl
-            }
-
-            players.push(player)
-            localStorage.removeItem("playerProfileUrl")
-            saveInLocalStorage("players", players)
-            saveInLocalStorage("connectedUser", player)
-            showToast("succes", 2000)
-            setTimeout(() => {
-                redirectToHomePage()
-            }, 2000)
-        })
-
+    if ((username.value.trim() === "" && password.value.trim() === "") || findUserName(username.value.trim()) || password.value.trim().length < 8) {
+        showToast("error", 2000)
         return
     }
 
-    showToast("error", 2000)
+    hashPassword(password.value).then(hashedPassword => {
+        const profileUrl = localStorage.getItem("playerProfileUrl") || "/images/hello.png"
+        const player = {
+            username: username.value,
+            password: hashedPassword,
+            score: 0,
+            profileUrl: profileUrl
+        }
+
+        players.push(player)
+        localStorage.removeItem("playerProfileUrl")
+        saveInLocalStorage("players", players)
+        saveInLocalStorage("connectedUser", player)
+        showToast("succes", 2000)
+        setTimeout(() => {
+            redirectToHomePage()
+        }, 2000)
+    })
 })
+
+function findUserName(username) {
+    players.map(player => {
+        if (player.username === username) {
+            return true
+        }
+    })
+
+    return false
+}
 
 document.getElementById("button_choose_avatar").addEventListener("click", () => {
     document.getElementById("avatars").classList.toggle("hidden")
@@ -226,7 +235,7 @@ document.getElementById("signin").addEventListener("click", () => {
     })
 
     if (!isUserLoggedIn) {
-        showToast("error", 3000)
+        showToast("error", 2000)
     }
 })
 
