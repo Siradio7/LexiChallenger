@@ -53,6 +53,10 @@ document.addEventListener("DOMContentLoaded", () => {
         document.getElementById("game_right_block").classList.add("z-40")
         ranking.classList.toggle("max-[600px]:hidden")
     })
+
+    document.getElementById("button_rules").addEventListener("click", () => {
+        document.getElementById("modal_rules").classList.add("modal-open")
+    })
 })
 
 buttonRestart.addEventListener("click", displayGameModal)
@@ -339,7 +343,7 @@ function playAnimation() {
         ease: Expo.easeInOut
     })
 
-    TweenMax.from("#button_pause", .5, {
+    TweenMax.from("#button_rules", .5, {
         delay: 0.8,
         x: 20,
         opacity: 0,
