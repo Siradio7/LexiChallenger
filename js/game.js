@@ -264,7 +264,7 @@ function refreshUsersRanking() {
     });
 
     // Sauvegarde de la liste mise à jour dans le localStorage
-    saveInLocalStorage(updatedPlayers)
+    saveInLocalStorage("players", updatedPlayers)
 
     // Trie des joueurs en fonction du score par ordre décroissant
     const playersSorted = updatedPlayers.sort((a, b) => b.score - a.score);
