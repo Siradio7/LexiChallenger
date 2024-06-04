@@ -184,7 +184,7 @@ function createPlayerInTheDOM(player) {
 
     const profile = document.createElement("img")
     profile.setAttribute("src", player.profileUrl)
-    profile.setAttribute("alt", "profile")
+    profile.setAttribute("alt", "pro")
     profile.classList.add("w-10", "h-10", "rounded-full", "p-1", "ring-2", "ring-gray-300", "dark:ring-gray-500", "cursor-pointer")
 
     const username = document.createElement("p")
