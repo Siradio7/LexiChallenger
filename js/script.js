@@ -1,4 +1,4 @@
-const env = "dev"
+const env = "prod"
 let players
 let body = document.body
 const listeJoueurs = document.getElementById("liste_joueurs")
@@ -211,6 +211,7 @@ document.getElementById("signin").addEventListener("click", () => {
     const password = document.getElementById("password_signin")
 
     if (username.value.trim() === "" || password.value.trim() === "") {
+        showToast("error", 2000)
         return
     }
 
