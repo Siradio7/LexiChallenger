@@ -1,3 +1,4 @@
+const env = "prod"
 const connectedUser = JSON.parse(localStorage.getItem("connectedUser"))
 const body = document.body
 const gameModal = document.getElementById("game_modal")
@@ -296,7 +297,7 @@ function refreshUsersRanking() {
 
 buttonLogout.addEventListener("click", () => {
     localStorage.removeItem("connectedUser")
-    window.location.pathname = "/"
+    window.location.pathname = env === "prod" ? "/" : "Devinette/"
 })
 
 function saveInLocalStorage(key, value) {

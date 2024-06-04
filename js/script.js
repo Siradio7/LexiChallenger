@@ -1,3 +1,4 @@
+const env = "prod"
 let players
 let body = document.body
 const listeJoueurs = document.getElementById("liste_joueurs")
@@ -259,7 +260,7 @@ function showToast(toastType, duration) {
 }
 
 function redirectToHomePage() {
-    window.location.pathname = "/pages/home.html"
+    window.location.pathname = env === "prod" ? "/pages/home.html" : "/Devinette/pages/home.html"
 }
 
 // Méthode pour hasher le mot de passe
