@@ -49,7 +49,7 @@ btnStart.addEventListener("click", async () => {
 function startGame() {
     observer.observe(playersList, config)
     // Récuperation des utilisateurs dans le localStorage
-    players = JSON.parse(localStorage.getItem("players")) || []
+    players = getInLocalStorage("players") || []
 
     // Affichage des utilisateurs
     if (players.length > 0) {

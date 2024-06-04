@@ -253,7 +253,7 @@ function loadUsers() {
 
 // Fonction pour rafraichir le classement des joueurs en fonction du score du joueur actuel
 function refreshUsersRanking() {
-    const players = JSON.parse(localStorage.getItem("players")) || [];
+    const players = getInLocalStorage("players") || [];
 
     // Mise à jour du score du joueur connecté
     const updatedPlayers = players.map(player => {
@@ -264,7 +264,7 @@ function refreshUsersRanking() {
     });
 
     // Sauvegarde de la liste mise à jour dans le localStorage
-    localStorage.setItem("players", JSON.stringify(updatedPlayers));
+    saveInLocalStorage(updatedPlayers)
 
     // Trie des joueurs en fonction du score par ordre décroissant
     const playersSorted = updatedPlayers.sort((a, b) => b.score - a.score);
